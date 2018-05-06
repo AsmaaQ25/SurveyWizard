@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.iaa.surveywizard.MyQuestions">
+
+
+    <TextView
+        android:id="@+id/My_Questions_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Questions"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="#0091EA"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:id="@+id/New_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New"
+        android:background="#0091EA"
+        android:singleLine="false"
+        android:layout_above="@+id/question_list"
+        android:layout_alignRight="@+id/question_list"
+        android:layout_alignEnd="@+id/question_list"
+        android:onClick="add_new_question"/>
+
+
+
+    <ListView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/question_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:drawSelectorOnTop="true"
+        android:layout_below="@id/My_Questions_text"
+        android:layout_marginTop="10dp">
+
+    </ListView>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0091EA"
+        android:text="refresh"
+        android:id="@+id/refresh_button"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:onClick="refresh"
+        android:layout_above="@+id/question_list"
+        android:layout_toRightOf="@+id/My_Questions_text"
+        android:layout_toEndOf="@+id/My_Questions_text"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp" />
+
+</RelativeLayout>
+
