@@ -1,5 +1,6 @@
 package com.example.iaa.surveywizard;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,13 +12,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class MyQuestions extends AppCompatActivity {
-     public static ArrayList<questions> questionsList = new ArrayList<>();
+    public static ArrayList<questions> questionsList = new ArrayList<>();
+    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_questions);
 
+        context = this;
         DatabaseAdapter Dbadapter = new DatabaseAdapter(this);
         questionsList = Dbadapter.getAllQuestionsWithoutAnswers();
 
@@ -40,4 +43,6 @@ public class MyQuestions extends AppCompatActivity {
         // Start the new activity
         startActivity(AddNewQuestionIntent);
     }
+
+
 }

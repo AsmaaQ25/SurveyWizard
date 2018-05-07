@@ -25,12 +25,13 @@ public class addNewQuestion extends AppCompatActivity {
     EditText answer_3;
     EditText answer_4;
     EditText answer_5;
-
+    RadioGroup radioGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_question);
-
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioGroup.check(R.id.three_choices);
         question = (EditText) findViewById(R.id.add_question);
         answer_1 = (EditText) findViewById(R.id.first_choice);
         answer_2 = (EditText) findViewById(R.id.second_choice);
@@ -40,7 +41,6 @@ public class addNewQuestion extends AppCompatActivity {
     }
     RadioButton radioButton2;
     public void noOfAnswers(View view){
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         RadioButton radioButton1 = (RadioButton) findViewById(R.id.two_choices);
         radioButton2 = (RadioButton) findViewById(R.id.three_choices);
         RadioButton radioButton3 = (RadioButton) findViewById(R.id.four_choices);
@@ -88,32 +88,37 @@ public class addNewQuestion extends AppCompatActivity {
 
     public void saveQuestion(View view){
 
-        DBadapter = new DatabaseAdapter(this);
+        if ((question.getText().toString().isEmpty() != true) && (answer_1.getText().toString().isEmpty() != true) && (answer_2.getText().toString().isEmpty() != true)) {
+            DBadapter = new DatabaseAdapter(this);
 
-        long Id = DBadapter.insertData(question.getText().toString(),answer_1.getText().toString(),
-                answer_2.getText().toString(),answer_3.getText().toString(),
-                answer_4.getText().toString(),answer_5.getText().toString());
+            long Id = DBadapter.insertData(question.getText().toString(), answer_1.getText().toString(),
+                    answer_2.getText().toString(), answer_3.getText().toString(),
+                    answer_4.getText().toString(), answer_5.getText().toString());
 
-        if (Id < 0){
-            Toast toast = Toast.makeText(this, "try again", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER,10,10);
-            toast.show();
+            if (Id < 0) {
+                Toast toast = Toast.makeText(this, "try again", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 10, 10);
+                toast.show();
+            } else {
+
+                Toast toast = Toast.makeText(this, "question added successfully", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 10, 10);
+                toast.show();
+                question.setText("");
+                answer_1.setText("");
+                answer_2.setText("");
+                answer_3.setText("");
+                answer_4.setText("");
+                answer_5.setText("");
+                radioGroup.check(R.id.three_choices);
+
+                this.recreate();
+            }
         }else {
-
-            Toast toast = Toast.makeText(this, "question added successfully", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER,10,10);
+            Toast toast = Toast.makeText(this, "add the question and its answers!?", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 10, 10);
             toast.show();
-            question.setText("");
-            answer_1.setText("");
-            answer_2.setText("");
-            answer_3.setText("");
-            answer_4.setText("");
-            answer_5.setText("");
-            radioButton2.setChecked(true);
-
-            this.recreate();
         }
-
     }
 
 }

@@ -92,10 +92,10 @@ public class DatabaseAdapter {
         return count;
     }
 
-    public int delete_raw(int QuestionId){
+    public int delete_raw(String Question){
         SQLiteDatabase db = helper.getWritableDatabase();
-        String[] whereArg = {""+QuestionId};
-        int count = db.delete(helper.Table_Name, helper.Uid + " =?", whereArg);
+        String[] whereArg = {Question};
+        int count = db.delete(helper.Table_Name, helper.column_1 + " =?", whereArg);
         db.close();
         return count;
     }

@@ -44,7 +44,6 @@
         android:layout_marginEnd="81dp" />
 
 
-
     <ListView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/question_list"

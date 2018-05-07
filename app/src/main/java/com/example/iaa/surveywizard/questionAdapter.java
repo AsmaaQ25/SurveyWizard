@@ -1,6 +1,8 @@
 package com.example.iaa.surveywizard;
 
 import android.content.Context;
+import android.content.Intent;
+import android.mtp.MtpConstants;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +34,7 @@ public class questionAdapter extends ArrayAdapter<questions> {
         }
 
 
-        questions currentQuestion;
+        final questions currentQuestion;
         currentQuestion = getItem(position);
 
         TextView textView = (TextView) listItemView.findViewById(R.id.textView);
@@ -41,12 +43,17 @@ public class questionAdapter extends ArrayAdapter<questions> {
 
         Button button = (Button) listItemView.findViewById(R.id.delete_button);
 
-        /*button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyQuestions.questionsList.remove(position);
+                DatabaseAdapter Dbadapter = new DatabaseAdapter(MyQuestions.context);
+
+                Dbadapter.delete_raw(currentQuestion.getMquestion());
+
+                Intent intent = new Intent(MyQuestions.context,MyQuestions.class);
+                MyQuestions.context.startActivity(intent);
             }
-        });*/
+        });
 
 
 

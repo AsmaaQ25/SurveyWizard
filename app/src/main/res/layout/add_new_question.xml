@@ -72,21 +72,21 @@
         android:paddingTop="10dp"
         android:id="@+id/first_choice"
         android:layout_below="@+id/radioGroup"
-         />
+        android:visibility="gone" />
     <EditText
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:id="@+id/second_choice"
         android:layout_below="@+id/first_choice"
-         />
+        android:visibility="gone" />
     <EditText
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:id="@+id/third_choice"
         android:layout_below="@+id/second_choice"
-         />
+        android:visibility="gone" />
     <EditText
         android:layout_width="200dp"
         android:layout_height="wrap_content"
