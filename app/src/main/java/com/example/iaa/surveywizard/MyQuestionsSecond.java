@@ -11,23 +11,15 @@ import java.util.ArrayList;
  */
 
 public class MyQuestionsSecond extends AppCompatActivity {
-    public static ArrayList<Question> questionsList = new ArrayList<>();
+    public static ArrayList<questions> questionsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_questions_second);
-        questionsList.add(new Question("How are u today?"));
-        questionsList.add(new Question("What is this number 1?"));
-        questionsList.add(new Question("What is this number 2?"));
-        questionsList.add(new Question("What is this number 3?"));
-        questionsList.add(new Question("What is this number 4?"));
-        questionsList.add(new Question("What is this number 5?"));
-        questionsList.add(new Question("What is this number 6?"));
-        questionsList.add(new Question("What is this number 7?"));
-        questionsList.add(new Question("What is this number 8?"));
-        questionsList.add(new Question("What is this number 9?"));
-        questionsList.add(new Question("What is this number 10?"));
+
+        DatabaseAdapter Dbadapter = new DatabaseAdapter(this);
+        questionsList = Dbadapter.getAllQuestionsWithoutAnswers();
 
 
         questionSecondAdapter adapter = new questionSecondAdapter(this, questionsList);

@@ -12,7 +12,7 @@
 
 
     <TextView
-        android:id="@+id/welcomeTextView"
+        android:id="@+id/Welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome to "
@@ -21,21 +21,21 @@
         android:textColor="#00BCD4"
         android:layout_margin="12dp"/>
     <TextView
-        android:id="@+id/sessionName"
+        android:id="@+id/pageName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" -session name- "
         android:fontFamily="sans-serif-medium"
         android:textSize="20sp"
         android:textColor="#00BCD4"
-        android:layout_alignTop="@+id/welcomeTextView"
-        android:layout_toRightOf="@+id/welcomeTextView"
-        android:layout_toEndOf="@+id/welcomeTextView" />
+        android:layout_alignTop="@+id/Welcome"
+        android:layout_toRightOf="@+id/Welcome"
+        android:layout_toEndOf="@+id/Welcome" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@+id/sessionName">
+            android:layout_below="@+id/pageName">
 
             <TextView
                 android:id="@+id/questionBody"
@@ -80,12 +80,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="forth option"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
+                <RadioButton
+                    android:id="@+id/fifthOption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="fifth option"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
             </RadioGroup>
         </LinearLayout>
 
         <Button
-            android:id="@+id/leaveSessionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -97,7 +104,6 @@
             android:padding="8dp"
             />
         <Button
-            android:id="@+id/submitAnswerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

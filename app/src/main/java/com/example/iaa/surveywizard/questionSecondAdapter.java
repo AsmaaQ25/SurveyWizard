@@ -13,8 +13,8 @@ import java.util.ArrayList;
 /**
  * Created by IAA on 3/7/2018.
  */
-public class questionSecondAdapter extends ArrayAdapter<Question> {
-    public questionSecondAdapter(Context context, ArrayList<Question> questionses) {
+public class questionSecondAdapter extends ArrayAdapter<questions> {
+    public questionSecondAdapter(Context context, ArrayList<questions> questionses) {
         super(context, 0, questionses);
     }
 
@@ -28,12 +28,12 @@ public class questionSecondAdapter extends ArrayAdapter<Question> {
         }
 
 
-        Question currentQuestion;
+        questions currentQuestion;
         currentQuestion = getItem(position);
 
         TextView textView = (TextView) listItemView.findViewById(R.id.textView3);
 
-        textView.setText(currentQuestion.getmQuestionBody());
+        textView.setText(currentQuestion.getMquestion());
 
         Button button = (Button) listItemView.findViewById(R.id.button);
         Button button2 = (Button) listItemView.findViewById(R.id.button2);

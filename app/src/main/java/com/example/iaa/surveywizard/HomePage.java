@@ -1,6 +1,7 @@
 package com.example.iaa.surveywizard;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,10 +9,14 @@ import android.widget.Button;
 
 public class HomePage extends AppCompatActivity {
 
+    DatabaseAdapter DBadapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+
+
 
     }
 
