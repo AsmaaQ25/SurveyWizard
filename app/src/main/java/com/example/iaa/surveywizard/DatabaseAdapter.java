@@ -39,41 +39,61 @@ public class DatabaseAdapter {
         db.close();
         return id;
     }
-    questions quest;
+
     public ArrayList<questions> getAllQuestionsWithoutAnswers(){
         SQLiteDatabase db = helper.getWritableDatabase();
         String[] columns = {helper.Uid, helper.column_1};
         Cursor cursor = db.query(helper.Table_Name, columns, null, null, null, null, null);
         ArrayList<questions> buf = new ArrayList<>();
-
+        questions quest;
         while(cursor.moveToNext()){
             int cid = cursor.getInt(cursor.getColumnIndex(helper.Uid));
             String question = cursor.getString(cursor.getColumnIndex(helper.column_1));
-            quest = new questions(cid,question);
+            quest = new questions(question);
             buf.add(quest);
         }
         return buf;
     }
 
-
-    public String getAllQuestionsWithAnswers(){
+    public int getIdOfQuestion(String questionX){
         SQLiteDatabase db = helper.getWritableDatabase();
-        String[] columns = {helper.Uid, helper.column_1};
-        Cursor cursor = db.query(helper.Table_Name, columns, null, null, null, null, null);
-        StringBuffer buf = new StringBuffer();
-        while(cursor.moveToNext()){
-            int cid = cursor.getInt(cursor.getColumnIndex(helper.Uid));
-            String question = cursor.getString(cursor.getColumnIndex(helper.column_1));
-            String answer_1 = cursor.getString(cursor.getColumnIndex(helper.Answer_1));
-            String answer_2 = cursor.getString(cursor.getColumnIndex(helper.Answer_2));
-            String answer_3 = cursor.getString(cursor.getColumnIndex(helper.Answer_3));
-            String answer_4 = cursor.getString(cursor.getColumnIndex(helper.Answer_4));
-            String answer_5 = cursor.getString(cursor.getColumnIndex(helper.Answer_5));
+        String[] columns = {helper.Uid, helper.column_1, helper.Answer_1, helper.Answer_2, helper.Answer_3, helper.Answer_4, helper.Answer_5};
+        String[] selectioArgs={questionX};
+        Cursor cursor = db.query(helper.Table_Name, columns, helper.column_1 + " =?", selectioArgs, null, null, null);
 
-            buf.append(cid+" "+question+" "+answer_1+" "+answer_2+" "+answer_3+" "+answer_4+" "+answer_5+" ");
+        int questId=-1;
+        while(cursor.moveToNext()){
+            questId = cursor.getInt(cursor.getColumnIndex(helper.Uid));
         }
-        db.close();
-        return buf.toString();
+        return questId;
+    }
+
+
+    public questionsWithAnswers getQuestionWithAnswers(int id){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = new String[]{helper.Uid, helper.column_1, helper.Answer_1, helper.Answer_2, helper.Answer_3, helper.Answer_4, helper.Answer_5};
+        Cursor cursor = db.query(helper.Table_Name, columns, helper.Uid+" = '"+id+"'", null, null, null, null);
+
+        questionsWithAnswers quest;
+        int cid=id;
+        String question="";
+        String answer1="";
+        String answer2="";
+        String answer3="";
+        String answer4="";
+        String answer5="";
+
+        while(cursor.moveToNext()){
+            cid = cursor.getInt(cursor.getColumnIndex(helper.Uid));
+            question = cursor.getString(cursor.getColumnIndex(helper.column_1));
+            answer1 = cursor.getString(cursor.getColumnIndex(helper.Answer_1));
+            answer2 = cursor.getString(cursor.getColumnIndex(helper.Answer_2));
+            answer3 = cursor.getString(cursor.getColumnIndex(helper.Answer_3));
+            answer4 = cursor.getString(cursor.getColumnIndex(helper.Answer_4));
+            answer5 = cursor.getString(cursor.getColumnIndex(helper.Answer_5));
+        }
+        quest = new questionsWithAnswers(cid,question,answer1,answer2,answer3,answer4,answer5);
+        return quest;
     }
 
     public int update(int oldQuestionId, String newQuestion, String newAnswer_1, String newAnswer_2, String newAnswer_3, String newAnswer_4, String newAnswer_5){

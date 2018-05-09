@@ -109,6 +109,7 @@ public class addNewQuestion extends AppCompatActivity {
                 answer_2.setText("");
                 answer_3.setText("");
                 answer_4.setText("");
+                answer_4.setText("");
                 answer_5.setText("");
                 radioGroup.check(R.id.three_choices);
 

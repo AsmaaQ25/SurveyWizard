@@ -28,7 +28,6 @@
         android:onClick="create_session_activity"/>
 
     <Button
-        android:id="@+id/join_session_button"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="join Session"

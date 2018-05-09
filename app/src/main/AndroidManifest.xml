@@ -15,22 +15,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateSession"
-            android:label="Create Session"/>
-        <activity android:name=".JoinSession"
-            android:label="Join Session"/>
-        <activity android:name=".MyQuestionsSecond"
-            android:label="My Questions"/>
-        <activity android:name=".CreateSurvey"
-            android:label="Create Survey"/>
-        <activity android:name=".addNewQuestion"
-            android:label="Add new question"/>
-        <activity android:name=".MyQuestions"
-            android:label="My Questions"></activity>
-        <activity android:name=".submitAnswer"
-            android:label="The Session"/>
-        <activity android:name=".TyNote"
-            android:label="Thank you!"></activity>
+        <activity
+            android:name=".CreateSession"
+            android:label="Create Session" />
+        <activity
+            android:name=".JoinSession"
+            android:label="Join Session" />
+        <activity
+            android:name=".MyQuestionsSecond"
+            android:label="My Questions" />
+        <activity
+            android:name=".CreateSurvey"
+            android:label="Create Survey" />
+        <activity
+            android:name=".addNewQuestion"
+            android:label="Add new question" />
+        <activity
+            android:name=".MyQuestions"
+            android:label="My Questions" />
+        <activity
+            android:name=".submitAnswer"
+            android:label="The Session" />
+        <activity
+            android:name=".TyNote"
+            android:label="Thank you!" />
+        <activity android:name=".Show_Result"></activity>
     </application>
 
 </manifest>

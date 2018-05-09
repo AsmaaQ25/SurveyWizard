@@ -38,7 +38,6 @@
             android:layout_below="@+id/pageName">
 
             <TextView
-                android:id="@+id/questionBody"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -57,33 +56,28 @@
                 >
 
                 <RadioButton
-                    android:id="@+id/firstOption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="first option"
                     android:textSize="18sp"/>
 
                 <RadioButton
-                    android:id="@+id/secondOption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="second option"
                     android:textSize="18sp"/>
                 <RadioButton
-                    android:id="@+id/thirdOption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="third option"
                     android:textSize="18sp"/>
                 <RadioButton
-                    android:id="@+id/forthOption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="forth option"
                     android:textSize="18sp"
                     android:visibility="gone"/>
                 <RadioButton
-                    android:id="@+id/fifthOption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="fifth option"

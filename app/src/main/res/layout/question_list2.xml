@@ -9,7 +9,7 @@
 
 
 
-    <TextView
+    <CheckedTextView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="question1"
@@ -21,27 +21,19 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:id="@+id/textView3" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:text="SEND"
-        android:background="#0091EA"
-        android:id="@+id/button"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignStart="@+id/button2" />
+
 
     <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:text="Show Result"
-        android:background="#0091EA"
+        android:padding="5dp"
         android:id="@+id/button2"
+        android:textColor="#ec3402"
         android:layout_alignTop="@+id/textView3"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3"
-        android:layout_marginLeft="6dp"
-        android:layout_marginStart="6dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 

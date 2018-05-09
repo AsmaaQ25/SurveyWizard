@@ -7,22 +7,22 @@ public class questions {
 
     private  String mquestion;
 
-    private int id;
+    //private int id;
     /**
      * Create a new Word object.
      *
      * @param question is the string resource Id for the question
      */
-    public questions(int Id, String question) {
+    public questions(/*int Id,*/ String question) {
         mquestion = question;
-        id=Id;
+        //id=Id;
     }
 
     public String getMquestion() {
         return mquestion;
     }
-    public int getQuestionId() {
+    /*public int getQuestionId() {
         return id;
-    }
+    }*/
 
 }

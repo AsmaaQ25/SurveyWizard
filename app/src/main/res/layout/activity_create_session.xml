@@ -37,7 +37,6 @@
         android:onClick="My_Question_activity"/>
 
     <Button
-        android:id="@+id/create_survey_button"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Create Survey"
