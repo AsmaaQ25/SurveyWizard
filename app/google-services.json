@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "75896776052",
+    "firebase_url": "https://survey-wizard-a1261.firebaseio.com",
+    "project_id": "survey-wizard-a1261",
+    "storage_bucket": "survey-wizard-a1261.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75896776052:android:ee3bc43fbe71e501",
+        "android_client_info": {
+          "package_name": "com.example.iaa.surveywizard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75896776052-fp2oevb02ovd5n26tq3n7id61usc7nvq.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "75896776052-fp2oevb02ovd5n26tq3n7id61usc7nvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeO0CWCSCjH6c8ofhlp58oRrg0YzP9aAI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

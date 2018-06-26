@@ -9,8 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import android.widget.Toast;
 
 /**
  * Created by IAA on 3/7/2018.
@@ -37,21 +42,40 @@ public class questionSecondAdapter extends ArrayAdapter<questions> {
 
         checkedTextView.setText(currentQuestion.getMquestion());
 
-        Button button2 = (Button) listItemView.findViewById(R.id.button2);
-
-
-        button2.setOnClickListener(new View.OnClickListener() {
+//show result button on the question_list2.xml
+        Button showResultBurtton = (Button) listItemView.findViewById(R.id.showResultButton);
+        showResultBurtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Show_Result.question = currentQuestion.getMquestion();
-
 
                 Intent intent = new Intent(MyQuestionsSecond.context,Show_Result.class);
                 MyQuestionsSecond.context.startActivity(intent);
 
             }
         });
+//upload button on the question_list2.xml
+//upload Ques to the Firebase server
+        Button uploadQuestionButton = (Button) listItemView.findViewById(R.id.uploadQuestionButton);
+        uploadQuestionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef= database.getReference("asmaa");
+                try {
+                    myRef.setValue("plowwwwww");
 
+                }
+                catch (Exception e)
+                {
+                    //Toast.makeText(questionSecondAdapter.this, e.toString(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(, e.toString(), Toast.LENGTH_LONG).show();
+
+                }
+
+
+            }
+        }) ;
 
 
         return listItemView;

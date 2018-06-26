@@ -10,6 +10,7 @@
 
 
     <CheckedTextView
+        android:id="@+id/textView3"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="question1"
@@ -19,22 +20,33 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:id="@+id/textView3" />
+        />
 
 
 
     <Button
+        android:id="@+id/showResultButton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Show Result"
         android:padding="5dp"
-        android:id="@+id/button2"
         android:textColor="#ec3402"
         android:layout_alignTop="@+id/textView3"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
+        android:layout_alignParentEnd="true"
+        />
+    <Button
+        android:id="@+id/uploadQuestionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="upload"
+        style="?android:attr/buttonStyleSmall"
+        android:padding="5dp"
+        android:textColor="#ec3402"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_toLeftOf="@+id/showResultButton"
+        />
 
 
 </RelativeLayout>
