@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 
 public class MyQuestionsSecond extends AppCompatActivity {
-    public static ArrayList<questions> questionsList = new ArrayList<>();
+    public static ArrayList<questionsWithAnswers> questionsList = new ArrayList<>();
 
     public static Context context;
     @Override

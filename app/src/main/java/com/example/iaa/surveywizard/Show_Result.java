@@ -42,7 +42,7 @@ public class Show_Result extends AppCompatActivity {
 
     PieChart pieChart;
 
-    public static ArrayList<questions> questionsList = new ArrayList<>();
+    public static ArrayList<questionsWithAnswers> questionsList = new ArrayList<>();
     DatabaseAdapter Dbadapter;
 
     @Override
@@ -67,11 +67,11 @@ public class Show_Result extends AppCompatActivity {
         xData = new String[5];
         questionsWithAnswers Quest;
         Quest = Dbadapter.getQuestionWithAnswers(id);
-        answer_1 = Quest.getmAnswer_1();
-        answer_2 = Quest.getmAnswer_2();
-        answer_3 = Quest.getmAnswer_3();
-        answer_4 = Quest.getmAnswer_4();
-        answer_5 = Quest.getmAnswer_5();
+        answer_1 = Quest.getAnswer_1();
+        answer_2 = Quest.getAnswer_2();
+        answer_3 = Quest.getAnswer_3();
+        answer_4 = Quest.getAnswer_4();
+        answer_5 = Quest.getAnswer_5();
 
         TextView textView = (TextView) findViewById(R.id.textView10);
         textView.setText(question);

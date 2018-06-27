@@ -18,9 +18,9 @@ import java.util.ArrayList;
 /**
  * Created by IAA on 2/20/2018.
  */
-public class questionAdapter extends ArrayAdapter<questions> {
+public class questionAdapter extends ArrayAdapter<questionsWithAnswers> {
 
-    public questionAdapter(Context context, ArrayList<questions> questionses) {
+    public questionAdapter(Context context, ArrayList<questionsWithAnswers> questionses) {
         super(context, 0, questionses);
     }
 
@@ -34,12 +34,12 @@ public class questionAdapter extends ArrayAdapter<questions> {
         }
 
 
-        final questions currentQuestion;
+        final questionsWithAnswers currentQuestion;
         currentQuestion = getItem(position);
 
         TextView textView = (TextView) listItemView.findViewById(R.id.textView);
 
-        textView.setText(currentQuestion.getMquestion());
+        textView.setText(currentQuestion.getQuestionBody());
 
         Button button = (Button) listItemView.findViewById(R.id.delete_button);
 
@@ -48,7 +48,7 @@ public class questionAdapter extends ArrayAdapter<questions> {
             public void onClick(View v) {
                 DatabaseAdapter Dbadapter = new DatabaseAdapter(MyQuestions.context);
 
-                Dbadapter.delete_raw(currentQuestion.getMquestion());
+                Dbadapter.delete_raw(currentQuestion.getQuestionBody());
 
                 Intent intent = new Intent(MyQuestions.context,MyQuestions.class);
                 MyQuestions.context.startActivity(intent);

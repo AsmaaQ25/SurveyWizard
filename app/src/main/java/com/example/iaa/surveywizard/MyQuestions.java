@@ -12,7 +12,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class MyQuestions extends AppCompatActivity {
-    public static ArrayList<questions> questionsList = new ArrayList<>();
+    public static ArrayList<questionsWithAnswers> questionsList = new ArrayList<>();
     public static Context context;
 
     @Override

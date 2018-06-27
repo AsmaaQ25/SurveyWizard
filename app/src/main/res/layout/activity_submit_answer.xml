@@ -38,6 +38,7 @@
             android:layout_below="@+id/pageName">
 
             <TextView
+                android:id="@+id/question_body"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -56,28 +57,33 @@
                 >
 
                 <RadioButton
+                    android:id="@+id/first_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="first option"
                     android:textSize="18sp"/>
 
                 <RadioButton
+                    android:id="@+id/second_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="second option"
                     android:textSize="18sp"/>
                 <RadioButton
+                    android:id="@+id/third_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="third option"
                     android:textSize="18sp"/>
                 <RadioButton
+                    android:id="@+id/fourth_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="forth option"
                     android:textSize="18sp"
                     android:visibility="gone"/>
                 <RadioButton
+                    android:id="@+id/fifth_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="fifth option"
@@ -87,6 +93,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -96,8 +103,10 @@
             android:textSize="20sp"
             android:layout_margin="10dp"
             android:padding="8dp"
+
             />
         <Button
+            android:id="@+id/leaveSessionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

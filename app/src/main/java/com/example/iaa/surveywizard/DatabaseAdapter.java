@@ -24,11 +24,11 @@ public class DatabaseAdapter {
         helper = new DatabaseHelper(context);
     }
 
-    public long insertData(String question, String Answer_1, String Answer_2, String Answer_3, String Answer_4, String Answer_5){
+    public long insertData(String questionBody, String Answer_1, String Answer_2, String Answer_3, String Answer_4, String Answer_5){
         SQLiteDatabase db = helper.getWritableDatabase();
 
         ContentValues contents = new ContentValues();
-        contents.put(helper.column_1, question);
+        contents.put(helper.column_1, questionBody);
         contents.put(helper.Answer_1, Answer_1);
         contents.put(helper.Answer_2, Answer_2);
         contents.put(helper.Answer_3, Answer_3);
@@ -40,16 +40,16 @@ public class DatabaseAdapter {
         return id;
     }
 
-    public ArrayList<questions> getAllQuestionsWithoutAnswers(){
+    public ArrayList<questionsWithAnswers> getAllQuestionsWithoutAnswers(){
         SQLiteDatabase db = helper.getWritableDatabase();
         String[] columns = {helper.Uid, helper.column_1};
         Cursor cursor = db.query(helper.Table_Name, columns, null, null, null, null, null);
-        ArrayList<questions> buf = new ArrayList<>();
-        questions quest;
+        ArrayList<questionsWithAnswers> buf = new ArrayList<>();
+        questionsWithAnswers quest;
         while(cursor.moveToNext()){
             int cid = cursor.getInt(cursor.getColumnIndex(helper.Uid));
             String question = cursor.getString(cursor.getColumnIndex(helper.column_1));
-            quest = new questions(question);
+            quest = new questionsWithAnswers(question);
             buf.add(quest);
         }
         return buf;
