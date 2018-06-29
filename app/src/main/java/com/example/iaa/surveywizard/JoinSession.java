@@ -40,6 +40,14 @@ public class JoinSession extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        Intent intent = new Intent(this, HomePage.class);
+        startActivity(intent);
+
+    }
+
     public void joinSession(View view){
         final long codenumber = Long.parseLong(code.getText().toString());
 

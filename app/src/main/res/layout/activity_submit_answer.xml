@@ -101,25 +101,27 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:text="SUBMIT"
             android:onClick="sumbetanswer"
             android:background="#0091EA"
             android:textSize="20sp"
-            android:layout_margin="10dp"
             android:padding="8dp"
-            android:id="@+id/button" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/button"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"/>
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
             android:text="Leave Session"
+            android:id="@+id/leavesessionButon"
             android:background="#0091EA"
+            android:onClick="leaveSession"
             android:textSize="22sp"
-            android:layout_margin="10dp"
             android:padding="8dp"
-            />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"

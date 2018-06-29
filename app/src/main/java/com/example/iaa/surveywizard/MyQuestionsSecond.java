@@ -73,12 +73,6 @@ public class MyQuestionsSecond extends AppCompatActivity {
                                     value.getAnswer_2_count(), value.getAnswer_3_count(), value.getAnswer_4_count(),
                                     value.getAnswer_5_count());
 
-                            questionsWithAnswers Quest;
-                            Quest = Dbadapter.getQuestionWithAnswers(id);
-                            int[] answerscount;
-
-                            answerscount = Dbadapter.getAnswersCount(Quest.getQuestionBody());
-
                             if (updateId == 1) {
                                 Toast.makeText(MyQuestionsSecond.this, "DataBase updated successfully", Toast.LENGTH_LONG).show();
                             }else {
@@ -123,4 +117,16 @@ public class MyQuestionsSecond extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+
+
+    }
+
+
+    public void endSession(View view) {
+        Intent intent = new Intent(this, HomePage.class);
+        startActivity(intent);
+    }
 }

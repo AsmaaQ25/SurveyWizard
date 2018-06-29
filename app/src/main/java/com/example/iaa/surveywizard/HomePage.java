@@ -9,7 +9,6 @@ import android.widget.Button;
 
 public class HomePage extends AppCompatActivity {
 
-    DatabaseAdapter DBadapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +16,12 @@ public class HomePage extends AppCompatActivity {
 
 
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
 
     }
 
@@ -30,7 +35,7 @@ public class HomePage extends AppCompatActivity {
 
     public void join_session_activity(View view){
         // Create a new intent to open the {@link JoinSession}
-        Intent joinSessionIntent = new Intent(HomePage.this, JoinSession.class);
+        Intent joinSessionIntent = new Intent(this, JoinSession.class);
 
         // Start the new activity
         startActivity(joinSessionIntent);

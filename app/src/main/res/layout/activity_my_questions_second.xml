@@ -14,6 +14,7 @@
         android:text="End"
         android:background="#0091EA"
         android:layout_gravity="right"
+        android:onClick="endSession"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/textView4"
         android:layout_toEndOf="@+id/textView4" />

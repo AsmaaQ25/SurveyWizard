@@ -31,9 +31,12 @@ public class MyQuestions extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        Intent joinsessionintent = new Intent(this, CreateSession.class);
+        startActivity(joinsessionintent);
 
-    public void refresh(View view){
-        //super.recreate();
     }
 
     public void add_new_question(View view){

@@ -11,18 +11,21 @@
     tools:context="com.example.iaa.surveywizard.TyNote">
 
     <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/smileyface"
-            android:layout_above="@+id/textView2" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/smileyface"
+        android:layout_above="@+id/textView2" />
     <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Thank You For Your Feedback"
-            android:fontFamily="serif"
-            android:textSize="40sp"
-            android:textColor="#0099ff"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-        android:id="@+id/textView2" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thank You!"
+        android:fontFamily="cursive"
+        android:textSize="40sp"
+        android:textColor="#0099ff"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/textView2"
+        android:focusable="false"
+        android:singleLine="false"
+        android:gravity="center_horizontal" />
  </RelativeLayout>

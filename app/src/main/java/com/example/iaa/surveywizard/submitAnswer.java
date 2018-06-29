@@ -126,40 +126,40 @@ public class submitAnswer extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     // This method is called once with the initial value and again
                     // whenever data at this location is updated.
+                    if (!(dataSnapshot.getValue().equals(dataSnapshot.getKey()))) {
 
-                    SessionData value = dataSnapshot.getValue(SessionData.class);
-                    //set the question view and show the question
-                    try {
-                        SessionName.setText(value.getSessionName());
-                        question_body.setText(value.getQuestionBody());
-                        first_option.setText(value.getAnswer_1());
-                        second_option.setText(value.getAnswer_2());
-                        if (value.getAnswer_3().equals(""))
-                        {
-                            third_option.setVisibility(View.GONE);
-                        }else{
-                            third_option.setVisibility(View.VISIBLE);
-                            third_option.setText(value.getAnswer_3());
+
+                        SessionData value = dataSnapshot.getValue(SessionData.class);
+                        //set the question view and show the question
+                        try {
+                            SessionName.setText(value.getSessionName());
+                            question_body.setText(value.getQuestionBody());
+                            first_option.setText(value.getAnswer_1());
+                            second_option.setText(value.getAnswer_2());
+                            if (value.getAnswer_3().equals("")) {
+                                third_option.setVisibility(View.GONE);
+                            } else {
+                                third_option.setVisibility(View.VISIBLE);
+                                third_option.setText(value.getAnswer_3());
+                            }
+
+                            if (value.getAnswer_4().equals("")) {
+                                forth_option.setVisibility(View.GONE);
+                            } else {
+                                forth_option.setVisibility(View.VISIBLE);
+                                forth_option.setText(value.getAnswer_4());
+                            }
+
+                            if (value.getAnswer_5().equals("")) {
+                                fifth_option.setVisibility(View.GONE);
+                            } else {
+                                fifth_option.setVisibility(View.VISIBLE);
+                                fifth_option.setText(value.getAnswer_5());
+                            }
+
+                        } catch (Exception e) {
+                            Toast.makeText(submitAnswer.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
                         }
-
-                        if (value.getAnswer_4().equals(""))
-                        {
-                            forth_option.setVisibility(View.GONE);
-                        }else{
-                            forth_option.setVisibility(View.VISIBLE);
-                            forth_option.setText(value.getAnswer_4());
-                        }
-
-                        if (value.getAnswer_5().equals(""))
-                        {
-                            fifth_option.setVisibility(View.GONE);
-                        }else{
-                            fifth_option.setVisibility(View.VISIBLE);
-                            fifth_option.setText(value.getAnswer_5());
-                        }
-
-                    } catch (Exception e) {
-                        Toast.makeText(submitAnswer.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
                     }
                 }
                 @Override
@@ -359,5 +359,15 @@ public class submitAnswer extends AppCompatActivity {
         }
 
 
+    }
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+
+    }
+
+    public void leaveSession(View view) {
+        Intent joinsessionintent = new Intent(submitAnswer.this, TyNote.class);
+        startActivity(joinsessionintent);
     }
 }

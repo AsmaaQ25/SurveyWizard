@@ -113,14 +113,20 @@ public class addNewQuestion extends AppCompatActivity {
                 answer_5.setText("");
                 radioGroup.check(R.id.three_choices);
 
-                Intent intent = new Intent(MyQuestions.context,MyQuestions.class);
-                MyQuestions.context.startActivity(intent);
+                Intent intent = new Intent(this, MyQuestions.class);
+                startActivity(intent);
             }
         }else {
             Toast toast = Toast.makeText(this, "add the question and its answers!?", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 10, 10);
             toast.show();
         }
+    }
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        Intent intent = new Intent(this, MyQuestions.class);
+        startActivity(intent);
     }
 
 }

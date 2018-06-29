@@ -42,6 +42,15 @@ public class CreateSurvey extends AppCompatActivity {
         myRef = database.getReference(sessionCode.getText().toString());
 
     }
+
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        Intent intent = new Intent(this, CreateSession.class);
+        startActivity(intent);
+
+    }
+
     public void startSession(View view){
         // Create a new intent to open the {@link MyQuestionsSecond}
 

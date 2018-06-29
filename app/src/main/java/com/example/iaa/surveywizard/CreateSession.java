@@ -27,5 +27,11 @@ public class CreateSession extends AppCompatActivity {
         // Start the new activity
         startActivity(creatSurvayIntent);
     }
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        Intent intent = new Intent(this, HomePage.class);
+        startActivity(intent);
 
+    }
 }
