@@ -18,6 +18,8 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/accent_material_light" />
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,17 +29,140 @@
         android:layout_below="@+id/textView6"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="15dp"
         android:textColor="#f90606" />
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_below="@id/textView10"
+    android:id="@+id/answerslinearLayout"
+    android:layout_marginTop="5dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="answer1"
+        android:textSize="20sp"
+        android:id="@+id/answer1textView"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#f90606" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="answer2"
+        android:textSize="20sp"
+        android:id="@+id/answer2textView"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#f90606" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="answer3"
+        android:textSize="20sp"
+        android:id="@+id/answer3textView"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#f90606" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="answer4"
+        android:textSize="20sp"
+        android:id="@+id/answer4textView"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#f90606"
+        android:visibility="gone"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="answer5"
+        android:textSize="20sp"
+        android:id="@+id/answer5textView"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#f90606"
+        android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/textView10"
+        android:id="@+id/countlinearLayout"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/answerslinearLayout"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="answer1count"
+            android:textSize="20sp"
+            android:id="@+id/answer1counttextView"
+            android:layout_below="@+id/textView6"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#f90606" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="answer2count"
+            android:textSize="20sp"
+            android:id="@+id/answer2counttextView"
+            android:layout_below="@+id/textView6"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#f90606" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="answer3count"
+            android:textSize="20sp"
+            android:id="@+id/answer3counttextView"
+            android:layout_below="@+id/textView6"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#f90606" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="answer4count"
+            android:textSize="20sp"
+            android:id="@+id/answer4counttextView"
+            android:layout_below="@+id/textView6"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#f90606"
+            android:visibility="gone"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="answer5count"
+            android:textSize="20sp"
+            android:id="@+id/answer5counttextView"
+            android:layout_below="@+id/textView6"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#f90606"
+            android:visibility="gone"/>
+    </LinearLayout>
 
     <com.github.mikephil.charting.charts.PieChart
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView10"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="94dp"
         android:id="@+id/pieChart"
-        android:layout_alignParentBottom="true"></com.github.mikephil.charting.charts.PieChart>
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/answerslinearLayout"></com.github.mikephil.charting.charts.PieChart>
 
 </RelativeLayout>

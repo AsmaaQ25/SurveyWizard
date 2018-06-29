@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,18 @@ public class Show_Result extends AppCompatActivity {
     public static String sessionCode;
     public static String question;
 
+    TextView questionTextView;
+    TextView answer1TextView;
+    TextView answer2TextView;
+    TextView answer3TextView;
+    TextView answer4TextView;
+    TextView answer5TextView;
+    TextView answer1countTextView;
+    TextView answer2countTextView;
+    TextView answer3countTextView;
+    TextView answer4countTextView;
+    TextView answer5countTextView;
+
 
     private float[] yData;
 
@@ -57,6 +70,19 @@ public class Show_Result extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show__result);
+
+        questionTextView = (TextView) findViewById(R.id.textView10);
+        answer1TextView = (TextView) findViewById(R.id.answer1textView);
+        answer2TextView = (TextView) findViewById(R.id.answer2textView);
+        answer3TextView = (TextView) findViewById(R.id.answer3textView);
+        answer4TextView = (TextView) findViewById(R.id.answer4textView);
+        answer5TextView = (TextView) findViewById(R.id.answer5textView);
+        answer1countTextView = (TextView) findViewById(R.id.answer1counttextView);
+        answer2countTextView = (TextView) findViewById(R.id.answer2counttextView);
+        answer3countTextView = (TextView) findViewById(R.id.answer3counttextView);
+        answer4countTextView = (TextView) findViewById(R.id.answer4counttextView);
+        answer5countTextView = (TextView) findViewById(R.id.answer5counttextView);
+
 
         pieChart = (PieChart) findViewById(R.id.pieChart);
         pieChart.setRotationEnabled(true);
@@ -81,23 +107,34 @@ public class Show_Result extends AppCompatActivity {
         answer_4 = Quest.getAnswer_4();
         answer_5 = Quest.getAnswer_5();
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                SessionData value = dataSnapshot.getValue(SessionData.class);
-                if (MyQuestionsSecond.MysessionCode.equals(dataSnapshot.getKey())) {
-                    int updateId = Dbadapter.update(id, value.getQuestionBody(), value.getAnswer_1(), value.getAnswer_2(),
-                            value.getAnswer_3(), value.getAnswer_4(), value.getAnswer_5(), value.getAnswer_1_count(),
-                            value.getAnswer_2_count(), value.getAnswer_3_count(), value.getAnswer_4_count(),
-                            value.getAnswer_5_count());
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+        questionTextView.setText(question);
+        answer1TextView.setText(answer_1);
+        answer2TextView.setText(answer_2);
+        if (answer_3.equals("")){
+            answer3TextView.setVisibility(View.GONE);
+        }
+        else{
+            answer3TextView.setText(answer_3);
+            answer3TextView.setVisibility(View.VISIBLE);
+        }
 
-            }
-        });
+        if (answer_4.equals("")){
+            answer4TextView.setVisibility(View.GONE);
+        }
+        else{
+            answer4TextView.setText(answer_4);
+            answer4TextView.setVisibility(View.VISIBLE);
+        }
+
+        if (answer_5.equals("")){
+            answer5TextView.setVisibility(View.GONE);
+        }
+        else{
+            answer5TextView.setText(answer_5);
+            answer5TextView.setVisibility(View.VISIBLE);
+        }
+
 
         int[] answerscount;
 
@@ -106,15 +143,39 @@ public class Show_Result extends AppCompatActivity {
         int sum = answerscount[0] + answerscount[1] + answerscount[2] + answerscount[3] + answerscount[4];
 
         if (sum != 0) {
-            answer_1_res = answerscount[0] / sum;
-            answer_2_res = answerscount[1] / sum;
-            answer_3_res = answerscount[2] / sum;
-            answer_4_res = answerscount[3] / sum;
-            answer_5_res = answerscount[4] / sum;
+            answer_1_res = (float) answerscount[0] / sum;
+            answer_2_res = (float) answerscount[1] / sum;
+            answer_3_res = (float) answerscount[2] / sum;
+            answer_4_res = (float) answerscount[3] / sum;
+            answer_5_res = (float) answerscount[4] / sum;
         }
 
-        TextView textView = (TextView) findViewById(R.id.textView10);
-        textView.setText(question);
+        answer1countTextView.setText(Integer.toString(answerscount[0]));
+        answer2countTextView.setText(Integer.toString(answerscount[1]));
+
+        if (answer3TextView.getVisibility() == View.GONE){
+            answer3countTextView.setVisibility(View.GONE);
+        }else {
+            answer3countTextView.setText(Integer.toString(answerscount[2]));
+            answer3countTextView.setVisibility(View.VISIBLE);
+        }
+
+        if (answer4TextView.getVisibility() == View.GONE){
+            answer4countTextView.setVisibility(View.GONE);
+        }else {
+            answer4countTextView.setText(Integer.toString(answerscount[3]));
+            answer4countTextView.setVisibility(View.VISIBLE);
+        }
+
+        if (answer5TextView.getVisibility() == View.GONE){
+            answer5countTextView.setVisibility(View.GONE);
+        }else {
+            answer5countTextView.setText(Integer.toString(answerscount[4]));
+            answer5countTextView.setVisibility(View.VISIBLE);
+        }
+
+
+
 
         xData[0] = answer_1;
         xData[1] = answer_2;
@@ -149,7 +210,7 @@ public class Show_Result extends AppCompatActivity {
                     }
                 }
                 String AnswerNum = xData[pos1];
-                Toast.makeText(Show_Result.this, AnswerNum + "\n"  + peresentage + "%", Toast.LENGTH_LONG).show();
+                Toast.makeText(Show_Result.this, AnswerNum + "\n"  + Float.toString(Float.parseFloat(peresentage)*100) + "%", Toast.LENGTH_LONG).show();
             }
 
             @Override

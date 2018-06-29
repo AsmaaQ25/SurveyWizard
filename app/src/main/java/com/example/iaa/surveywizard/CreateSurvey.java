@@ -21,6 +21,9 @@ public class CreateSurvey extends AppCompatActivity {
 
     TextView sessionCode;
     EditText sessionName;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+    DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class CreateSurvey extends AppCompatActivity {
         myRandomNumber = r.nextInt(99999999-10000000+1)+10000000;
         sessionCode.setText(Integer.toString(myRandomNumber));
 
+        myRef = database.getReference(sessionCode.getText().toString());
+
     }
     public void startSession(View view){
         // Create a new intent to open the {@link MyQuestionsSecond}
@@ -44,6 +49,8 @@ public class CreateSurvey extends AppCompatActivity {
 
         MyQuestionsSecond.MysessionName = sessionName.getText().toString();
         MyQuestionsSecond.MysessionCode = sessionCode.getText().toString();
+
+        myRef.setValue(MyQuestionsSecond.MysessionCode);
 
         // Start the new activity
         startActivity(startSessionIntent);

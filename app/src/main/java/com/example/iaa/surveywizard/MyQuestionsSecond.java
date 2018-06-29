@@ -31,7 +31,6 @@ public class MyQuestionsSecond extends AppCompatActivity {
 
     TextView newSessionName;
     TextView newSessionCode;
-    TextView textV;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -46,7 +45,6 @@ public class MyQuestionsSecond extends AppCompatActivity {
 
         newSessionName = (TextView) findViewById(R.id.sessionNametextView);
         newSessionCode = (TextView) findViewById(R.id.sessionCodetextView);
-        textV = (TextView) findViewById(R.id.textV);
 
         newSessionName.setText(MysessionName);
         newSessionCode.setText(MysessionCode);
@@ -83,7 +81,6 @@ public class MyQuestionsSecond extends AppCompatActivity {
 
                             if (updateId == 1) {
                                 Toast.makeText(MyQuestionsSecond.this, "DataBase updated successfully", Toast.LENGTH_LONG).show();
-                                textV.setText(Integer.toString(id));
                             }else {
                                 Toast.makeText(MyQuestionsSecond.this, "DataBase didn't update successfully", Toast.LENGTH_LONG).show();
                             }

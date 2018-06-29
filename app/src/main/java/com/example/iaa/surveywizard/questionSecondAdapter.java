@@ -24,7 +24,7 @@ public class questionSecondAdapter extends ArrayAdapter<questionsWithAnswers> {
     public questionSecondAdapter(Context context, ArrayList<questionsWithAnswers> questionses) {
         super(context, 0, questionses);
     }
-    int flag =0;
+
     public static Context context;
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -50,10 +50,8 @@ public class questionSecondAdapter extends ArrayAdapter<questionsWithAnswers> {
                 Show_Result.question = currentQuestion.getQuestionBody();
                 Show_Result.sessionCode = MyQuestionsSecond.MysessionCode;
 
-                if (flag != 0) {
                     Intent intent = new Intent(MyQuestionsSecond.context, Show_Result.class);
                     MyQuestionsSecond.context.startActivity(intent);
-                }
             }
         });
 
@@ -64,7 +62,6 @@ public class questionSecondAdapter extends ArrayAdapter<questionsWithAnswers> {
         uploadQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                flag++;
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef= database.getReference(MyQuestionsSecond.MysessionCode);
 
