@@ -15,16 +15,21 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class Show_Result extends AppCompatActivity {
 
-    private float answer_1_res = 25.0f;
-    private float answer_2_res = 15.0f;
-    private float answer_3_res = 30.0f;
-    private float answer_4_res = 20.0f;
-    private float answer_5_res = 10.0f;
+    private float answer_1_res;
+    private float answer_2_res;
+    private float answer_3_res;
+    private float answer_4_res;
+    private float answer_5_res;
 
     private String answer_1;
     private String answer_2;
@@ -32,46 +37,81 @@ public class Show_Result extends AppCompatActivity {
     private String answer_4;
     private String answer_5;
 
+    public static String sessionCode;
     public static String question;
-    public static int questionId;
 
 
-    private float[] yData = {answer_1_res, answer_2_res, answer_3_res, answer_4_res, answer_5_res};
+    private float[] yData;
 
     private String[] xData;
 
     PieChart pieChart;
 
-    public static ArrayList<questionsWithAnswers> questionsList = new ArrayList<>();
     DatabaseAdapter Dbadapter;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference(sessionCode);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show__result);
+
         pieChart = (PieChart) findViewById(R.id.pieChart);
         pieChart.setRotationEnabled(true);
-        //pieChart.setUsePercentValues(true);
-        //pieChart.setHoleColor(Color.BLUE);
-        //pieChart.setCenterTextColor(Color.BLACK);
-        pieChart.setHoleRadius(25f);
+        pieChart.setHoleRadius(30f);
         pieChart.setTransparentCircleAlpha(0);
-        pieChart.setCenterText("Results Chart");
+        pieChart.setCenterText("Answers Chart");
         pieChart.setCenterTextSize(10);
-        //pieChart.setDrawEntryLabels(true);
-        //pieChart.setEntryLabelTextSize(20);
-        //More options just check out the documentation!
+
+
         Dbadapter = new DatabaseAdapter(this);
-        int id = Dbadapter.getIdOfQuestion(question);
+        final int id = Dbadapter.getIdOfQuestion(question);
 
         xData = new String[5];
+        yData = new float[5];
+
         questionsWithAnswers Quest;
         Quest = Dbadapter.getQuestionWithAnswers(id);
+
         answer_1 = Quest.getAnswer_1();
         answer_2 = Quest.getAnswer_2();
         answer_3 = Quest.getAnswer_3();
         answer_4 = Quest.getAnswer_4();
         answer_5 = Quest.getAnswer_5();
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                SessionData value = dataSnapshot.getValue(SessionData.class);
+                if (MyQuestionsSecond.MysessionCode.equals(dataSnapshot.getKey())) {
+                    int updateId = Dbadapter.update(id, value.getQuestionBody(), value.getAnswer_1(), value.getAnswer_2(),
+                            value.getAnswer_3(), value.getAnswer_4(), value.getAnswer_5(), value.getAnswer_1_count(),
+                            value.getAnswer_2_count(), value.getAnswer_3_count(), value.getAnswer_4_count(),
+                            value.getAnswer_5_count());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        int[] answerscount;
+
+        answerscount = Dbadapter.getAnswersCount(Quest.getQuestionBody());
+
+        int sum = answerscount[0] + answerscount[1] + answerscount[2] + answerscount[3] + answerscount[4];
+
+        if (sum != 0) {
+            answer_1_res = answerscount[0] / sum;
+            answer_2_res = answerscount[1] / sum;
+            answer_3_res = answerscount[2] / sum;
+            answer_4_res = answerscount[3] / sum;
+            answer_5_res = answerscount[4] / sum;
+        }
 
         TextView textView = (TextView) findViewById(R.id.textView10);
         textView.setText(question);
@@ -82,6 +122,11 @@ public class Show_Result extends AppCompatActivity {
         xData[3] = answer_4;
         xData[4] = answer_5;
 
+        yData[0] = answer_1_res;
+        yData[1] = answer_2_res;
+        yData[2] = answer_3_res;
+        yData[3] = answer_4_res;
+        yData[4] = answer_5_res;
 
         addDataSet();
 

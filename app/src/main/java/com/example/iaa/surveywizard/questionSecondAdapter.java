@@ -24,6 +24,7 @@ public class questionSecondAdapter extends ArrayAdapter<questionsWithAnswers> {
     public questionSecondAdapter(Context context, ArrayList<questionsWithAnswers> questionses) {
         super(context, 0, questionses);
     }
+    int flag =0;
     public static Context context;
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -41,44 +42,55 @@ public class questionSecondAdapter extends ArrayAdapter<questionsWithAnswers> {
         CheckedTextView checkedTextView = (CheckedTextView) listItemView.findViewById(R.id.textView3);
         checkedTextView.setText(currentQuestion.getQuestionBody());
 
-//show result button on the question_list2.xml
+        //show result button on the question_list2.xml
         Button showResultButton = (Button) listItemView.findViewById(R.id.showResultButton);
         showResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Show_Result.question = currentQuestion.getQuestionBody();
+                Show_Result.sessionCode = MyQuestionsSecond.MysessionCode;
 
-                Intent intent = new Intent(MyQuestionsSecond.context,Show_Result.class);
-                MyQuestionsSecond.context.startActivity(intent);
+                if (flag != 0) {
+                    Intent intent = new Intent(MyQuestionsSecond.context, Show_Result.class);
+                    MyQuestionsSecond.context.startActivity(intent);
+                }
             }
         });
-//upload button on the question_list2.xml
-//upload Ques to the Firebase server
 
 
-
+        //upload button on the question_list2.xml
+        //upload Ques to the Firebase server
         Button uploadQuestionButton = (Button) listItemView.findViewById(R.id.uploadQuestionButton);
         uploadQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                flag++;
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef= database.getReference("sessionCode");
+                DatabaseReference myRef= database.getReference(MyQuestionsSecond.MysessionCode);
 
                 DatabaseAdapter Dbadapter;
                 Dbadapter = new DatabaseAdapter(MyQuestionsSecond.context);
 
                 int id = Dbadapter.getIdOfQuestion(currentQuestion.getQuestionBody());
                 questionsWithAnswers ques = Dbadapter.getQuestionWithAnswers(id);
+
+                int[] answersCount = new int[5];
+                answersCount = Dbadapter.getAnswersCount(ques.getQuestionBody());
+
+                SessionData session = new SessionData(MyQuestionsSecond.MysessionName,
+                        ques.getQuestionBody(), ques.getAnswer_1(), ques.getAnswer_2(),
+                        ques.getAnswer_3(), ques.getAnswer_4(), ques.getAnswer_5(),
+                        answersCount[0], answersCount[1], answersCount[2], answersCount[3], answersCount[4]);
+
                 try {
-                    myRef.setValue(ques);
+                    myRef.setValue(session);
+                    Toast.makeText(MyQuestionsSecond.context, "Question uploaded successfully", Toast.LENGTH_LONG).show();
 
                 }
                 catch (Exception e)
                 {
-                    //Toast.makeText(questionSecondAdapter.this, e.toString(), Toast.LENGTH_LONG).show();
-                    //Toast.makeText(, e.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MyQuestionsSecond.context, e.toString(), Toast.LENGTH_LONG).show();
                 }
-
             }
         }) ;
 

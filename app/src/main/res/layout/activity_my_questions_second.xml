@@ -27,11 +27,58 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:paddingTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:background="#0091EA" />
+
+    <TextView
+        android:id="@+id/textV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="25sp"
+         />
+
+    <TextView
+        android:id="@+id/sessionNametextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="session name"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:layout_marginLeft="10dp"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:background="#0091EA"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3" />
+        android:background="#9091EA"
+        android:layout_below="@+id/textView4"
+        />
+
+    <TextView
+        android:id="@+id/sessionCodetextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="session code"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:background="#009175"
+        android:layout_toRightOf="@id/sessionNametextView"
+        android:layout_below="@+id/textView4"
+        />
+
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/listView2"
@@ -39,7 +86,7 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:drawSelectorOnTop="true"
-        android:layout_below="@id/textView4"
+        android:layout_below="@id/sessionNametextView"
         android:layout_above="@+id/end_session_button" />
 
 

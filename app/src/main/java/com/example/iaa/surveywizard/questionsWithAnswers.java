@@ -13,11 +13,7 @@ public class questionsWithAnswers {
 
 
     private int id;
-    /**
-     * Create a new Word object.
-     *
-     * @param question is the string resource Id for the question
-     */
+
 
     private  questionsWithAnswers(){}
 

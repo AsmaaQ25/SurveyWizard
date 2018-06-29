@@ -93,7 +93,7 @@ public class addNewQuestion extends AppCompatActivity {
 
             long Id = DBadapter.insertData(question.getText().toString(), answer_1.getText().toString(),
                     answer_2.getText().toString(), answer_3.getText().toString(),
-                    answer_4.getText().toString(), answer_5.getText().toString());
+                    answer_4.getText().toString(), answer_5.getText().toString(), 0, 0, 0, 0, 0);
 
             if (Id < 0) {
                 Toast toast = Toast.makeText(this, "try again", Toast.LENGTH_SHORT);
@@ -113,7 +113,8 @@ public class addNewQuestion extends AppCompatActivity {
                 answer_5.setText("");
                 radioGroup.check(R.id.three_choices);
 
-                this.recreate();
+                Intent intent = new Intent(MyQuestions.context,MyQuestions.class);
+                MyQuestions.context.startActivity(intent);
             }
         }else {
             Toast toast = Toast.makeText(this, "add the question and its answers!?", Toast.LENGTH_SHORT);

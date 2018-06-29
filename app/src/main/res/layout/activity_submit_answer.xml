@@ -38,13 +38,13 @@
             android:layout_below="@+id/pageName">
 
             <TextView
-                android:id="@+id/question_body"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:layout_margin="8dp"
                 android:background="#0091EA"
                 android:text="The Question"
+                android:id="@+id/question_body"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 />
@@ -54,59 +54,63 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="8dp"
+                android:id="@+id/optionsRadioGroup"
                 >
 
                 <RadioButton
-                    android:id="@+id/first_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="first option"
+                    android:id="@+id/first_option"
+                    android:onClick="optionChanged"
                     android:textSize="18sp"/>
 
                 <RadioButton
-                    android:id="@+id/second_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="second option"
+                    android:id="@+id/second_option"
+                    android:onClick="optionChanged"
                     android:textSize="18sp"/>
                 <RadioButton
-                    android:id="@+id/third_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="third option"
+                    android:id="@+id/third_option"
+                    android:onClick="optionChanged"
                     android:textSize="18sp"/>
                 <RadioButton
-                    android:id="@+id/fourth_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="forth option"
+                    android:id="@+id/forth_option"
+                    android:onClick="optionChanged"
                     android:textSize="18sp"
                     android:visibility="gone"/>
                 <RadioButton
-                    android:id="@+id/fifth_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="fifth option"
+                    android:id="@+id/fifth_option"
+                    android:onClick="optionChanged"
                     android:textSize="18sp"
                     android:visibility="gone"/>
             </RadioGroup>
         </LinearLayout>
 
         <Button
-            android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:text="SUBMIT"
+            android:onClick="sumbetanswer"
             android:background="#0091EA"
             android:textSize="20sp"
             android:layout_margin="10dp"
             android:padding="8dp"
-
-            />
+            android:id="@+id/button" />
         <Button
-            android:id="@+id/leaveSessionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -116,5 +120,14 @@
             android:layout_margin="10dp"
             android:padding="8dp"
             />
-    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Text"
+        android:id="@+id/unusedtext"
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+</RelativeLayout>
 
