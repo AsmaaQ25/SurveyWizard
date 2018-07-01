@@ -49,36 +49,36 @@ public class JoinSession extends AppCompatActivity {
     }
 
     public void joinSession(View view){
-        final long codenumber = Long.parseLong(code.getText().toString());
+
 
 
         try {
-            myRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot value: dataSnapshot.getChildren())
-                    {
+            if (!code.getText().toString().equals("")) {
+                final long codenumber = Long.parseLong(code.getText().toString());
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot value : dataSnapshot.getChildren()) {
 
-                        if (value.getKey().equals(Long.toString(codenumber)))
-                        {
-                            Intent joinsessionintent = new Intent(JoinSession.this, submitAnswer.class);
-                            submitAnswer.sessionCode = value.getKey();
-                            // Start the new activity
-                            startActivity(joinsessionintent);
+                            if (value.getKey().equals(Long.toString(codenumber))) {
+                                Intent joinsessionintent = new Intent(JoinSession.this, submitAnswer.class);
+                                submitAnswer.sessionCode = value.getKey();
+                                // Start the new activity
+                                startActivity(joinsessionintent);
+                            }
+                        }
+                        if (!(submitAnswer.sessionCode.equals(Long.toString(codenumber)))) {
+                            Toast.makeText(JoinSession.this, "enter a correct code", Toast.LENGTH_LONG).show();
                         }
                     }
-                    if (!(submitAnswer.sessionCode.equals(Long.toString(codenumber))))
-                    {
-                        Toast.makeText(JoinSession.this,  "enter a correct code", Toast.LENGTH_LONG).show();
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
                     }
-                }
+                });
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
+            }
         } catch (Exception e) {
             Toast.makeText(JoinSession.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
         }

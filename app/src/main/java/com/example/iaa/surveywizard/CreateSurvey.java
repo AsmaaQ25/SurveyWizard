@@ -36,7 +36,7 @@ public class CreateSurvey extends AppCompatActivity {
 
         Random r = new Random();
         int myRandomNumber = 0;
-        myRandomNumber = r.nextInt(99999999-10000000+1)+10000000;
+        myRandomNumber = r.nextInt(99999-10000+1)+10000;
         sessionCode.setText(Integer.toString(myRandomNumber));
 
         myRef = database.getReference(sessionCode.getText().toString());
