@@ -34,7 +34,9 @@ public class MyQuestionsSecond extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
+
     DatabaseReference myRef1 = database.getReference();
+    DatabaseReference myRef = database.getReference(MysessionCode);
 
 
     @Override
@@ -43,11 +45,14 @@ public class MyQuestionsSecond extends AppCompatActivity {
         setContentView(R.layout.activity_my_questions_second);
         context = this;
 
+        startService(new Intent(this, ClosingService.class));
+
         newSessionName = (TextView) findViewById(R.id.sessionNametextView);
         newSessionCode = (TextView) findViewById(R.id.sessionCodetextView);
 
         newSessionName.setText(MysessionName);
         newSessionCode.setText(MysessionCode);
+
 
 
 
@@ -115,6 +120,15 @@ public class MyQuestionsSecond extends AppCompatActivity {
             Toast.makeText(MyQuestionsSecond.this, e.toString(), Toast.LENGTH_LONG).show();
         }
 
+        TextView text = (TextView) findViewById(R.id.textView12);
+
+        if (questionsList.size() == 0)
+        {
+            text.setVisibility(View.VISIBLE);
+        }else {
+            text.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -124,8 +138,16 @@ public class MyQuestionsSecond extends AppCompatActivity {
 
     }
 
+    protected void ondestroy() {
+        myRef.removeValue();
+    }
+
+
 
     public void endSession(View view) {
+
+        myRef.removeValue();
+
         Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }

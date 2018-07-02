@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thank You!"
+        android:text="Thank You!\n Session Ended"
         android:fontFamily="cursive"
         android:textSize="40sp"
         android:textColor="#0099ff"

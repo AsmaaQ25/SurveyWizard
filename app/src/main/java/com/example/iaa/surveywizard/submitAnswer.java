@@ -144,43 +144,15 @@ public class submitAnswer extends AppCompatActivity {
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    /*SessionData value = dataSnapshot.getValue(SessionData.class);
-                    //set the question view and show the question
-                    try {
-                        if (sessionCode.equals(dataSnapshot.getKey())) {
-                            SessionName.setText(value.getSessionName());
-                            question_body.setText(value.getQuestionBody());
-                            first_option.setText(value.getAnswer_1());
-                            second_option.setText(value.getAnswer_2());
-                            if (value.getAnswer_3().equals("")) {
-                                third_option.setVisibility(View.GONE);
-                            } else {
-                                third_option.setVisibility(View.VISIBLE);
-                                third_option.setText(value.getAnswer_3());
-                            }
 
-                            if (value.getAnswer_4().equals("")) {
-                                forth_option.setVisibility(View.GONE);
-                            } else {
-                                forth_option.setVisibility(View.VISIBLE);
-                                forth_option.setText(value.getAnswer_4());
-                            }
-
-                            if (value.getAnswer_5().equals("")) {
-                                fifth_option.setVisibility(View.GONE);
-                            } else {
-                                fifth_option.setVisibility(View.VISIBLE);
-                                fifth_option.setText(value.getAnswer_5());
-                            }
-                            flag=0;
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(submitAnswer.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
-                    }*/
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
+                    if (sessionCode.equals(dataSnapshot.getKey())) {
+                        Intent joinsessionintent = new Intent(submitAnswer.this, TyNote.class);
+                        startActivity(joinsessionintent);
+                    }
 
                 }
 
@@ -195,65 +167,147 @@ public class submitAnswer extends AppCompatActivity {
                 }
             });
 
-            /*myRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // This method is called once with the initial value and again
-                    // whenever data at this location is updated.
-                    if (!(dataSnapshot.getValue().equals(dataSnapshot.getKey()))) {
-
-
-                        SessionData value = dataSnapshot.getValue(SessionData.class);
-                        //set the question view and show the question
-                        try {
-                            SessionName.setText(value.getSessionName());
-                            question_body.setText(value.getQuestionBody());
-                            first_option.setText(value.getAnswer_1());
-                            second_option.setText(value.getAnswer_2());
-                            if (value.getAnswer_3().equals("")) {
-                                third_option.setVisibility(View.GONE);
-                            } else {
-                                third_option.setVisibility(View.VISIBLE);
-                                third_option.setText(value.getAnswer_3());
-                            }
-
-                            if (value.getAnswer_4().equals("")) {
-                                forth_option.setVisibility(View.GONE);
-                            } else {
-                                forth_option.setVisibility(View.VISIBLE);
-                                forth_option.setText(value.getAnswer_4());
-                            }
-
-                            if (value.getAnswer_5().equals("")) {
-                                fifth_option.setVisibility(View.GONE);
-                            } else {
-                                fifth_option.setVisibility(View.VISIBLE);
-                                fifth_option.setText(value.getAnswer_5());
-                            }
-                            //flag=0;
-
-                        } catch (Exception e) {
-                            Toast.makeText(submitAnswer.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    Toast.makeText(submitAnswer.this, "Failed to read value", Toast.LENGTH_LONG).show();
-                }
-            });
-
-*/
-
         }catch (Exception e){
             Toast.makeText(submitAnswer.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
         }
+        optionsRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int choosedOption = optionsRadioGroup.getCheckedRadioButtonId();
 
+                switch (choosedOption){
+                    case R.id.first_option:
+                        try {
+                            unusedtext.setText(myRef.getKey().toString());
+                            Ref1.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.getValue(long.class) != null) {
+                                        // This method is called once with the initial value and again
+                                        // whenever data at this location is updated.
+                                        long value = dataSnapshot.getValue(long.class);
+                                        //set the question view and show the question
+                                        unusedtext.setText(Long.toString(value));
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    // Failed to read value
+                                    Toast.makeText(submitAnswer.this, "Failed to read value", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(submitAnswer.this, e.toString() + "Failed to read value", Toast.LENGTH_LONG).show();
+                        }
+
+                        break;
+                    case R.id.second_option:
+                        try {
+                            Ref2.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.getValue(long.class) != null) {
+                                        // This method is called once with the initial value and again
+                                        // whenever data at this location is updated.
+                                        long value = dataSnapshot.getValue(long.class);
+                                        //set the question view and show the question
+                                        unusedtext.setText(Long.toString(value));
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    // Failed to read value
+                                    Toast.makeText(submitAnswer.this, "Failed to read value", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(submitAnswer.this, e.toString() + "Failed to read value", Toast.LENGTH_LONG).show();
+                        }
+
+                        break;
+                    case R.id.third_option:
+                        try {
+                            Ref3.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.getValue(long.class) != null) {
+                                        // This method is called once with the initial value and again
+                                        // whenever data at this location is updated.
+                                        long value = dataSnapshot.getValue(long.class);
+                                        //set the question view and show the question
+                                        unusedtext.setText(Long.toString(value));
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    // Failed to read value
+                                    Toast.makeText(submitAnswer.this, "Failed to read value", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(submitAnswer.this, e.toString() + "Failed to read value", Toast.LENGTH_LONG).show();
+                        }
+
+                        break;
+                    case R.id.forth_option:
+                        try {
+                            Ref4.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.getValue(long.class) != null) {
+                                        // This method is called once with the initial value and again
+                                        // whenever data at this location is updated.
+                                        long value = dataSnapshot.getValue(long.class);
+                                        //set the question view and show the question
+                                        unusedtext.setText(Long.toString(value));
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    // Failed to read value
+                                    Toast.makeText(submitAnswer.this, "Failed to read value", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(submitAnswer.this, e.toString() + "Failed to read value", Toast.LENGTH_LONG).show();
+                        }
+
+                        break;
+                    case R.id.fifth_option:
+                        try {
+                            Ref5.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.getValue(long.class) != null) {
+                                        // This method is called once with the initial value and again
+                                        // whenever data at this location is updated.
+                                        long value = dataSnapshot.getValue(long.class);
+                                        //set the question view and show the question
+                                        unusedtext.setText(Long.toString(value));
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    // Failed to read value
+                                    Toast.makeText(submitAnswer.this, "Failed to read value", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(submitAnswer.this, e.toString() + "Failed to read value", Toast.LENGTH_LONG).show();
+                        }
+
+                        break;
+                    default:
+                        break;
+
+                }
+
+            }
+        });
 
     }
 
-    public void optionChanged(View view) {
+    /*public void optionChanged(View view) {
         int choosedOption = optionsRadioGroup.getCheckedRadioButtonId();
 
         switch (choosedOption){
@@ -374,7 +428,7 @@ public class submitAnswer extends AppCompatActivity {
 
     }
 
-
+*/
     public void sumbetanswer(View view) {
         if (flag == 0) {
             int choosedOption = optionsRadioGroup.getCheckedRadioButtonId();
@@ -385,9 +439,6 @@ public class submitAnswer extends AppCompatActivity {
                     try {
                         Ref1.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
 
-                        /*Intent joinsessionintent = new Intent(submitAnswer.this, submitAnswer.class);
-                        startActivity(joinsessionintent);*/
-
                         Toast.makeText(submitAnswer.this, "answer1 sended successfully", Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
                         Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
@@ -396,8 +447,7 @@ public class submitAnswer extends AppCompatActivity {
                 case R.id.second_option:
                     try {
                         Ref2.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
-                        /*Intent joinsessionintent = new Intent(submitAnswer.this, submitAnswer.class);
-                        startActivity(joinsessionintent);*/
+
                         Toast.makeText(submitAnswer.this, "answer2 sended successfully", Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
                         Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
@@ -406,8 +456,7 @@ public class submitAnswer extends AppCompatActivity {
                 case R.id.third_option:
                     try {
                         Ref3.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
-                        /*Intent joinsessionintent = new Intent(submitAnswer.this, submitAnswer.class);
-                        startActivity(joinsessionintent);*/
+
                         Toast.makeText(submitAnswer.this, "answer3 sended successfully", Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
                         Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
@@ -416,8 +465,7 @@ public class submitAnswer extends AppCompatActivity {
                 case R.id.forth_option:
                     try {
                         Ref4.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
-                        /*Intent joinsessionintent = new Intent(submitAnswer.this, submitAnswer.class);
-                        startActivity(joinsessionintent);*/
+
                         Toast.makeText(submitAnswer.this, "answer4 sended successfully", Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
                         Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
@@ -426,8 +474,7 @@ public class submitAnswer extends AppCompatActivity {
                 case R.id.fifth_option:
                     try {
                         Ref5.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
-                        /*Intent joinsessionintent = new Intent(submitAnswer.this, submitAnswer.class);
-                        startActivity(joinsessionintent);*/
+
                         Toast.makeText(submitAnswer.this, "answer5 sended successfully", Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
                         Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
@@ -437,8 +484,6 @@ public class submitAnswer extends AppCompatActivity {
                     break;
             }
             flag=1;
-            TextView text = (TextView) findViewById(R.id.textView7);
-            text.setText(Integer.toString(flag));
         }
 
 

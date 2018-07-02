@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -24,11 +25,20 @@ public class MyQuestions extends AppCompatActivity {
         DatabaseAdapter Dbadapter = new DatabaseAdapter(this);
         questionsList = Dbadapter.getAllQuestionsWithoutAnswers();
 
+        TextView text = (TextView) findViewById(R.id.textView7);
+
         questionAdapter adapter = new questionAdapter(this, questionsList);
 
         ListView listView = (ListView) findViewById(R.id.question_list);
 
         listView.setAdapter(adapter);
+
+        if (questionsList.size() == 0)
+        {
+            text.setVisibility(View.VISIBLE);
+        }else {
+            text.setVisibility(View.GONE);
+        }
     }
 
     @Override
