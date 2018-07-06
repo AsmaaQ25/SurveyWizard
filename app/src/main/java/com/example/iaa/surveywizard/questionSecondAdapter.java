@@ -21,11 +21,13 @@ import android.widget.Toast;
  * Created by IAA on 3/7/2018.
  */
 public class questionSecondAdapter extends ArrayAdapter<questionsWithAnswers> {
+
     public questionSecondAdapter(Context context, ArrayList<questionsWithAnswers> questionses) {
         super(context, 0, questionses);
     }
 
     public static Context context;
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -39,8 +41,8 @@ public class questionSecondAdapter extends ArrayAdapter<questionsWithAnswers> {
         final questionsWithAnswers currentQuestion;
         currentQuestion = getItem(position);
 
-        CheckedTextView checkedTextView = (CheckedTextView) listItemView.findViewById(R.id.textView3);
-        checkedTextView.setText(currentQuestion.getQuestionBody());
+        TextView textView = (TextView) listItemView.findViewById(R.id.textView3);
+        textView.setText(currentQuestion.getQuestionBody());
 
         //show result button on the question_list2.xml
         Button showResultButton = (Button) listItemView.findViewById(R.id.showResultButton);
@@ -71,7 +73,7 @@ public class questionSecondAdapter extends ArrayAdapter<questionsWithAnswers> {
                 int id = Dbadapter.getIdOfQuestion(currentQuestion.getQuestionBody());
                 questionsWithAnswers ques = Dbadapter.getQuestionWithAnswers(id);
 
-                int[] answersCount = new int[5];
+                int[] answersCount;
                 answersCount = Dbadapter.getAnswersCount(ques.getQuestionBody());
 
                 SessionData session = new SessionData(MyQuestionsSecond.MysessionName,

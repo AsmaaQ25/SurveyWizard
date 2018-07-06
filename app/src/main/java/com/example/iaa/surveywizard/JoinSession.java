@@ -56,6 +56,7 @@ public class JoinSession extends AppCompatActivity {
             if (!code.getText().toString().equals("")) {
                 final long codenumber = Long.parseLong(code.getText().toString());
                 myRef.addValueEventListener(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot value : dataSnapshot.getChildren()) {

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class MyQuestions extends AppCompatActivity {
-    public static ArrayList<questionsWithAnswers> questionsList = new ArrayList<>();
+    public static ArrayList<String> questionsList = new ArrayList<>();
     public static Context context;
 
     @Override
@@ -23,11 +23,11 @@ public class MyQuestions extends AppCompatActivity {
 
         context = this;
         DatabaseAdapter Dbadapter = new DatabaseAdapter(this);
-        questionsList = Dbadapter.getAllQuestionsWithoutAnswers();
+        questionsList = Dbadapter.getAllQuestionscategories();
 
         TextView text = (TextView) findViewById(R.id.textView7);
 
-        questionAdapter adapter = new questionAdapter(this, questionsList);
+        categoryAdapter adapter = new categoryAdapter(this, questionsList);
 
         ListView listView = (ListView) findViewById(R.id.question_list);
 

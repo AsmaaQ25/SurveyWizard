@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.IBinder;
 
 public class ClosingService extends Service {
+
+
+    public static int flag=0;
     public ClosingService() {
     }
 
@@ -26,8 +29,16 @@ public class ClosingService extends Service {
     }
 
     private void fireClosingNotification() {
-        MyQuestionsSecond myquestion = new MyQuestionsSecond();
+        if (flag == 1) {
+            MyQuestionsSecond myquestion = new MyQuestionsSecond();
 
-        myquestion.ondestroy();
+            myquestion.ondestroy();
+        }else if (flag == 2)
+        {
+            Create_Exam create_exam = new Create_Exam();
+
+            create_exam.ondestroy();
+        }
+
     }
 }

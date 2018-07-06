@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    tools:context="com.example.iaa.surveywizard.MyQuestions">
-
+    android:layout_height="match_parent">
 
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView15"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="question1"
@@ -22,32 +18,31 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         />
 
-
-
     <Button
-        android:id="@+id/showResultButton"
+        android:id="@+id/delete_button"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Result"
-        android:padding="5dp"
+        android:text="X"
+        android:textSize="18dp"
         android:textColor="#ec3402"
-        android:layout_alignTop="@+id/textView3"
+        android:layout_alignTop="@+id/textView15"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        />
+        android:layout_alignParentEnd="true" />
+
+
 
     <Button
-        android:id="@+id/uploadQuestionButton"
+        android:id="@+id/showanswersButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="upload"
-        style="?android:attr/buttonStyleSmall"
+        android:text="Show Answers"
         android:padding="5dp"
         android:textColor="#ec3402"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_toLeftOf="@+id/showResultButton"
+        android:layout_alignTop="@+id/textView15"
+        android:layout_toLeftOf="@id/delete_button"
         />
+
 
 
 </RelativeLayout>

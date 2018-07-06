@@ -24,13 +24,14 @@ public class DatabaseAdapter {
         helper = new DatabaseHelper(context);
     }
 
-    public long insertData(String questionBody, String Answer_1, String Answer_2, String Answer_3,
+    public long insertData(String questionBody, String category, String Answer_1, String Answer_2, String Answer_3,
                            String Answer_4, String Answer_5, int Answer_1_count, int Answer_2_count,
                            int Answer_3_count, int Answer_4_count, int Answer_5_count){
         SQLiteDatabase db = helper.getWritableDatabase();
 
         ContentValues contents = new ContentValues();
         contents.put(helper.column_1, questionBody);
+        contents.put(helper.category, category);
         contents.put(helper.Answer_1, Answer_1);
         contents.put(helper.Answer_2, Answer_2);
         contents.put(helper.Answer_3, Answer_3);
@@ -64,6 +65,37 @@ public class DatabaseAdapter {
         return buf;
     }
 
+    public ArrayList<questionsWithAnswers> getAllQuestionsbycategory(String category){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {helper.Uid, helper.column_1};
+        String[] selectioArgs={category};
+        Cursor cursor = db.query(helper.Table_Name, columns, helper.category + " =?", selectioArgs, null, null, null);
+
+        ArrayList<questionsWithAnswers> buf = new ArrayList<>();
+        questionsWithAnswers quest;
+        while(cursor.moveToNext()){
+            int cid = cursor.getInt(cursor.getColumnIndex(helper.Uid));
+            String question = cursor.getString(cursor.getColumnIndex(helper.column_1));
+            quest = new questionsWithAnswers(question);
+            buf.add(quest);
+        }
+        return buf;
+    }
+
+    public ArrayList<String> getAllQuestionscategories(){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {helper.Uid, helper.category};
+        Cursor cursor = db.query(helper.Table_Name, columns, null, null, null, null, null);
+        ArrayList<String> buf = new ArrayList<>();
+
+        while(cursor.moveToNext()){
+            int cid = cursor.getInt(cursor.getColumnIndex(helper.Uid));
+            String category = cursor.getString(cursor.getColumnIndex(helper.category));
+
+            buf.add(category);
+        }
+        return buf;
+    }
 
     public int[] getAnswersCount(String questionX){
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -85,6 +117,8 @@ public class DatabaseAdapter {
         }
         return answerscount;
     }
+
+
 
 
     public int getIdOfQuestion(String questionX){
@@ -176,6 +210,7 @@ public class DatabaseAdapter {
         public static final int version= 2;
         public static final String Uid = "_id";
         public static final String column_1 = "question";
+        public static final String category = "category";
         public static final String Answer_1 = "answer_1";
         public static final String Answer_2 = "answer_2";
         public static final String Answer_3 = "answer_3";
@@ -189,9 +224,11 @@ public class DatabaseAdapter {
 
         public static final String create_table = "CREATE TABLE " + Table_Name +
                 " (" + Uid +" INTEGER PRIMARY KEY AUTOINCREMENT, " + column_1 + " TEXT NOT NULL, " +
-                Answer_1 + " TEXT, " + Answer_2 + " TEXT, " + Answer_3 + " TEXT, " + Answer_4 + " TEXT, "
-                + Answer_5 + " TEXT, " + Answer_1_count + " INTEGER, " + Answer_2_count + " INTEGER, "
-                + Answer_3_count + " INTEGER, " + Answer_4_count + " INTEGER, " + Answer_5_count + " INTEGER);";
+                category + " TEXT NOT NULL, " + Answer_1 + " TEXT, " + Answer_2 + " TEXT, " + Answer_3 +
+                " TEXT, " + Answer_4 + " TEXT, " + Answer_5 + " TEXT, " + Answer_1_count + " INTEGER, "
+                + Answer_2_count + " INTEGER, " + Answer_3_count + " INTEGER, " + Answer_4_count + " INTEGER, "
+                + Answer_5_count + " INTEGER);";
+
         public static final String drop_table = "DROP TABLE IF EXISTS" + Table_Name ;
 
         Context context;

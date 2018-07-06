@@ -62,8 +62,6 @@ public class Show_Result extends AppCompatActivity {
 
     DatabaseAdapter Dbadapter;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference(sessionCode);
 
 
     @Override

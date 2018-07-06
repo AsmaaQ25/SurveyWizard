@@ -45,7 +45,10 @@ public class MyQuestionsSecond extends AppCompatActivity {
         setContentView(R.layout.activity_my_questions_second);
         context = this;
 
+
         startService(new Intent(this, ClosingService.class));
+
+        ClosingService.flag=1;
 
         newSessionName = (TextView) findViewById(R.id.sessionNametextView);
         newSessionCode = (TextView) findViewById(R.id.sessionCodetextView);

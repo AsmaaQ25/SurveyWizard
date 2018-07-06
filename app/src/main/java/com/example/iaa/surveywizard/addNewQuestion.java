@@ -25,9 +25,13 @@ public class addNewQuestion extends AppCompatActivity {
     EditText answer_3;
     EditText answer_4;
     EditText answer_5;
+    EditText category;
     RadioGroup radioGroup;
+    DatabaseAdapter DBadapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_question);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -38,14 +42,13 @@ public class addNewQuestion extends AppCompatActivity {
         answer_3 = (EditText) findViewById(R.id.third_choice);
         answer_4 = (EditText) findViewById(R.id.fourth_choice);
         answer_5 = (EditText) findViewById(R.id.fifth_choice);
+        category = (EditText) findViewById(R.id.question_category);
+
     }
-    RadioButton radioButton2;
+
     public void noOfAnswers(View view){
-        RadioButton radioButton1 = (RadioButton) findViewById(R.id.two_choices);
-        radioButton2 = (RadioButton) findViewById(R.id.three_choices);
-        RadioButton radioButton3 = (RadioButton) findViewById(R.id.four_choices);
-        RadioButton radioButton4 = (RadioButton) findViewById(R.id.five_choices);
-        int id = -1;
+
+        int id;
 
         id = radioGroup.getCheckedRadioButtonId();
 
@@ -84,16 +87,16 @@ public class addNewQuestion extends AppCompatActivity {
         }
     }
 
-    DatabaseAdapter DBadapter;
-
     public void saveQuestion(View view){
 
-        if ((question.getText().toString().isEmpty() != true) && (answer_1.getText().toString().isEmpty() != true) && (answer_2.getText().toString().isEmpty() != true)) {
+        if ((question.getText().toString().isEmpty() != true) && (answer_1.getText().toString().isEmpty() != true)
+                && (answer_2.getText().toString().isEmpty() != true) && (category.getText().toString().isEmpty() != true)) {
             DBadapter = new DatabaseAdapter(this);
 
-            long Id = DBadapter.insertData(question.getText().toString(), answer_1.getText().toString(),
-                    answer_2.getText().toString(), answer_3.getText().toString(),
-                    answer_4.getText().toString(), answer_5.getText().toString(), 0, 0, 0, 0, 0);
+            long Id = DBadapter.insertData(question.getText().toString(), category.getText().toString(),
+                    answer_1.getText().toString(), answer_2.getText().toString(),
+                    answer_3.getText().toString(), answer_4.getText().toString(),
+                    answer_5.getText().toString(), 0, 0, 0, 0, 0);
 
             if (Id < 0) {
                 Toast toast = Toast.makeText(this, "try again", Toast.LENGTH_SHORT);
@@ -117,7 +120,7 @@ public class addNewQuestion extends AppCompatActivity {
                 startActivity(intent);
             }
         }else {
-            Toast toast = Toast.makeText(this, "add the question and its answers!?", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, "add the question, category and answers!", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 10, 10);
             toast.show();
         }

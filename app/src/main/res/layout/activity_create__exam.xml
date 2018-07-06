@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.iaa.surveywizard.Create_Exam">
+
+    <TextView
+        android:id="@+id/sessionnametext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="session name"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:background="#9091EA"
+        />
+
+    <TextView
+        android:id="@+id/sessioncodetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="code"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:background="#009175"
+        android:layout_toRightOf="@id/sessionnametext"
+        />
+
+    <TextView
+        android:id="@+id/instructiontext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick at most 10 questions to put in the exam"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:textSize="15sp"
+        android:layout_below="@id/sessioncodetext"
+        />
+
+    <TextView
+        android:id="@+id/questionPicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:textSize="15sp"
+        android:layout_below="@id/instructiontext"
+        />
+
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Questions picked"
+        android:textColor="#009175"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        android:layout_below="@id/instructiontext"
+        android:layout_toRightOf="@id/questionPicked"
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="Reset"
+        android:id="@+id/resetButon"
+        android:background="#FFDE"
+        android:onClick="reset"
+        android:textSize="17sp"
+        android:padding="8dp"
+        android:layout_alignTop="@+id/textView13"
+        android:layout_toRightOf="@+id/textView13"
+        android:layout_toEndOf="@+id/textView13" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Question list is empty"
+        android:id="@+id/text3"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Exam"
+        android:onClick="sendExam"
+        android:background="#FFDE03"
+        android:textSize="20sp"
+        android:padding="8dp"
+        android:id="@+id/sendExamButton"
+        android:layout_alignParentBottom="true"
+        />
+
+    <Button
+        android:id="@+id/results_button"
+        android:layout_width="62dp"
+        android:layout_height="wrap_content"
+        android:text="Results"
+        android:background="#FFE4"
+        android:onClick="results"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/sendExamButton"
+        android:layout_marginLeft="10dp"/>
+
+    <Button
+        android:id="@+id/End_session_button"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="End"
+        android:background="#FFEA"
+        android:onClick="endSession"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"/>
+
+    <ListView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/question_exam_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true"
+        android:layout_below="@id/questionPicked"
+        android:layout_marginTop="10dp"
+        android:layout_above="@id/End_session_button">
+
+    </ListView>
+
+
+
+</RelativeLayout>

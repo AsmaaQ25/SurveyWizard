@@ -30,31 +30,41 @@ public class questionAdapter extends ArrayAdapter<questionsWithAnswers> {
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.question_list, parent, false);
+                    R.layout.answerslist, parent, false);
         }
 
 
         final questionsWithAnswers currentQuestion;
         currentQuestion = getItem(position);
 
-        TextView textView = (TextView) listItemView.findViewById(R.id.textView);
+        TextView question = (TextView) listItemView.findViewById(R.id.textView15);
 
-        textView.setText(currentQuestion.getQuestionBody());
+        question.setText(currentQuestion.getQuestionBody());
 
         Button button = (Button) listItemView.findViewById(R.id.delete_button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseAdapter Dbadapter = new DatabaseAdapter(MyQuestions.context);
+                DatabaseAdapter Dbadapter = new DatabaseAdapter(questionsOfCategory.context);
 
                 Dbadapter.delete_raw(currentQuestion.getQuestionBody());
 
-                Intent intent = new Intent(MyQuestions.context,MyQuestions.class);
-                MyQuestions.context.startActivity(intent);
+                Intent intent = new Intent(questionsOfCategory.context, questionsOfCategory.class);
+                questionsOfCategory.context.startActivity(intent);
             }
         });
 
+        Button button2 = (Button) listItemView.findViewById(R.id.showanswersButton);
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(questionsOfCategory.context, answersofQuestion.class);
+                answersofQuestion.question = currentQuestion.getQuestionBody();
+                questionsOfCategory.context.startActivity(intent);
+            }
+        });
 
 
         return listItemView;

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.iaa.surveywizard.CreateSession">
+
+
+    <TextView
+        android:id="@+id/sessionnametextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="session name"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:background="#9091EA"
+        />
+
+    <TextView
+        android:id="@+id/sessioncodetextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="session code"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:background="#009175"
+        android:layout_toRightOf="@id/sessionnametextView"
+        />
+
+
+    <Button
+        android:id="@+id/upload_Survey_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="upload survey"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="100dp"
+        android:background="#9951EA"
+        android:onClick="UploadSurvey"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="upload exam"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/upload_Survey_button"
+        android:background="#0091EA"
+        android:onClick="UploadExam"/>
+
+</RelativeLayout>

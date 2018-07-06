@@ -54,12 +54,12 @@ public class CreateSurvey extends AppCompatActivity {
     public void startSession(View view){
         // Create a new intent to open the {@link MyQuestionsSecond}
 
-        Intent startSessionIntent = new Intent(CreateSurvey.this, MyQuestionsSecond.class);
+        Intent startSessionIntent = new Intent(CreateSurvey.this, Survey.class);
 
-        MyQuestionsSecond.MysessionName = sessionName.getText().toString();
-        MyQuestionsSecond.MysessionCode = sessionCode.getText().toString();
+        Survey.sessionName = sessionName.getText().toString();
+        Survey.sessionCode = sessionCode.getText().toString();
 
-        myRef.setValue(MyQuestionsSecond.MysessionCode);
+        myRef.setValue(sessionCode.getText().toString());
 
         // Start the new activity
         startActivity(startSessionIntent);

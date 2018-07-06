@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -16,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.Ref;
+import java.util.ArrayList;
 
 public class submitAnswer extends AppCompatActivity {
 
@@ -25,7 +27,6 @@ public class submitAnswer extends AppCompatActivity {
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference(sessionCode);
     DatabaseReference myRef1 = database.getReference();
 
 
@@ -35,10 +36,21 @@ public class submitAnswer extends AppCompatActivity {
     DatabaseReference Ref4 = database.getReference(sessionCode).child("answer_4_count");
     DatabaseReference Ref5 = database.getReference(sessionCode).child("answer_5_count");
 
+    DatabaseReference examRef1 = database.getReference(sessionCode).child("examquestions").child("0");
+    DatabaseReference examRef2 = database.getReference(sessionCode).child("examquestions").child("1");
+    DatabaseReference examRef3 = database.getReference(sessionCode).child("examquestions").child("2");
+    DatabaseReference examRef4 = database.getReference(sessionCode).child("examquestions").child("3");
+    DatabaseReference examRef5 = database.getReference(sessionCode).child("examquestions").child("4");
+    DatabaseReference examRef6 = database.getReference(sessionCode).child("examquestions").child("5");
+    DatabaseReference examRef7 = database.getReference(sessionCode).child("examquestions").child("6");
+    DatabaseReference examRef8 = database.getReference(sessionCode).child("examquestions").child("7");
+    DatabaseReference examRef9 = database.getReference(sessionCode).child("examquestions").child("8");
+    DatabaseReference examRef10 = database.getReference(sessionCode).child("examquestions").child("9");
+
 
 
     TextView question_body;
-    TextView unusedtext;
+    public static TextView unusedtext;
     TextView SessionName;
     RadioButton first_option;
     RadioButton second_option;
@@ -46,7 +58,12 @@ public class submitAnswer extends AppCompatActivity {
     RadioButton forth_option;
     RadioButton fifth_option;
     RadioGroup optionsRadioGroup;
+    LinearLayout questionLayout;
+    ListView listView;
+
     static int flag =0;
+    static int surveyFlag=0;
+    static int examFlag=0;
 
     static String question;
     static String answer1;
@@ -54,6 +71,32 @@ public class submitAnswer extends AppCompatActivity {
     static String answer3;
     static String answer4;
     static String answer5;
+
+    public static int answerquestion1=0;
+    public static int answerquestion2=0;
+    public static int answerquestion3=0;
+    public static int answerquestion4=0;
+    public static int answerquestion5=0;
+    public static int answerquestion6=0;
+    public static int answerquestion7=0;
+    public static int answerquestion8=0;
+    public static int answerquestion9=0;
+    public static int answerquestion10=0;
+
+    public static int Answerquestion1=0;
+    public static int Answerquestion2=0;
+    public static int Answerquestion3=0;
+    public static int Answerquestion4=0;
+    public static int Answerquestion5=0;
+    public static int Answerquestion6=0;
+    public static int Answerquestion7=0;
+    public static int Answerquestion8=0;
+    public static int Answerquestion9=0;
+    public static int Answerquestion10=0;
+
+
+    int numberofQuestions=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +112,8 @@ public class submitAnswer extends AppCompatActivity {
         forth_option = (RadioButton) findViewById(R.id.forth_option);
         fifth_option = (RadioButton) findViewById(R.id.fifth_option);
         optionsRadioGroup = (RadioGroup) findViewById(R.id.optionsRadioGroup);
+        questionLayout = (LinearLayout) findViewById(R.id.questionLinearLayout);
+        listView = (ListView) findViewById(R.id.answerExam_list);
 
 
         try {
@@ -79,67 +124,106 @@ public class submitAnswer extends AppCompatActivity {
                     //set the question view and show the question
                     try {
                         if (sessionCode.equals(dataSnapshot.getKey())) {
-                            SessionData value = dataSnapshot.getValue(SessionData.class);
 
-                            if (!value.getQuestionBody().equals(question)) {
-                                flag = 0;
-                            } else if (!value.getAnswer_1().equals(answer1)) {
-                                flag = 0;
-                            } else if (!value.getAnswer_2().equals(answer2)) {
-                                flag = 0;
-                            } else if (!value.getAnswer_3().equals(answer3)) {
-                                if (!value.getAnswer_3().equals("")) {
+                            try {
+                                SessionData value = dataSnapshot.getValue(SessionData.class);
+                                questionLayout.setVisibility(View.VISIBLE);
+                                listView.setVisibility(View.GONE);
+                                if (!value.getQuestionBody().equals(question)) {
+                                    surveyFlag=1;
+                                    examFlag=0;
                                     flag = 0;
-                                }
-                            } else if (!value.getAnswer_4().equals(answer4)) {
-                                if (!value.getAnswer_4().equals("")) {
+                                } else if (!value.getAnswer_1().equals(answer1)) {
+                                    surveyFlag=1;
+                                    examFlag=0;
                                     flag = 0;
-                                }
-                            } else if (!value.getAnswer_5().equals(answer5)) {
-                                if (!value.getAnswer_5().equals("")) {
+                                } else if (!value.getAnswer_2().equals(answer2)) {
+                                    surveyFlag=1;
+                                    examFlag=0;
                                     flag = 0;
+                                } else if (!value.getAnswer_3().equals(answer3)) {
+                                    if (!value.getAnswer_3().equals("")) {
+                                        surveyFlag=1;
+                                        examFlag=0;
+                                        flag = 0;
+                                    }
+                                } else if (!value.getAnswer_4().equals(answer4)) {
+                                    if (!value.getAnswer_4().equals("")) {
+                                        surveyFlag=1;
+                                        examFlag=0;
+                                        flag = 0;
+                                    }
+                                } else if (!value.getAnswer_5().equals(answer5)) {
+                                    if (!value.getAnswer_5().equals("")) {
+                                        surveyFlag=1;
+                                        examFlag=0;
+                                        flag = 0;
+                                    }
                                 }
+
+                                SessionName.setText(value.getSessionName());
+
+                                question_body.setText(value.getQuestionBody());
+                                question = question_body.getText().toString();
+
+                                first_option.setText(value.getAnswer_1());
+                                answer1 = first_option.getText().toString();
+
+                                second_option.setText(value.getAnswer_2());
+                                answer2 = second_option.getText().toString();
+
+                                if (value.getAnswer_3().equals("")) {
+                                    third_option.setVisibility(View.GONE);
+                                } else {
+                                    third_option.setVisibility(View.VISIBLE);
+                                    third_option.setText(value.getAnswer_3());
+                                    answer3 = third_option.getText().toString();
+                                }
+
+                                if (value.getAnswer_4().equals("")) {
+                                    forth_option.setVisibility(View.GONE);
+                                } else {
+                                    forth_option.setVisibility(View.VISIBLE);
+                                    forth_option.setText(value.getAnswer_4());
+                                    answer4 = forth_option.getText().toString();
+                                }
+
+                                if (value.getAnswer_5().equals("")) {
+                                    fifth_option.setVisibility(View.GONE);
+                                } else {
+                                    fifth_option.setVisibility(View.VISIBLE);
+                                    fifth_option.setText(value.getAnswer_5());
+                                    answer5 = fifth_option.getText().toString();
+                                }
+
+                            } catch (Exception e) {
+
+                            }
+                            try {
+                                SessionExamData Value = dataSnapshot.getValue(SessionExamData.class);
+
+                                questionLayout.setVisibility(View.GONE);
+                                listView.setVisibility(View.VISIBLE);
+                                SessionName.setText(Value.getSessionName());
+                                ArrayList<examquestion> examquestions = Value.getExamquestions();
+
+                                SubmitAnswerAdapter adapter = new SubmitAnswerAdapter(submitAnswer.this, examquestions);
+
+                                listView.setAdapter(adapter);
+                                surveyFlag=0;
+                                examFlag=1;
+                                numberofQuestions=examquestions.size();
+
+
+                            } catch (Exception E) {
+
                             }
 
-                            SessionName.setText(value.getSessionName());
-
-                            question_body.setText(value.getQuestionBody());
-                            question=question_body.getText().toString();
-
-                            first_option.setText(value.getAnswer_1());
-                            answer1=first_option.getText().toString();
-
-                            second_option.setText(value.getAnswer_2());
-                            answer2=second_option.getText().toString();
-
-                            if (value.getAnswer_3().equals("")) {
-                                third_option.setVisibility(View.GONE);
-                            } else {
-                                third_option.setVisibility(View.VISIBLE);
-                                third_option.setText(value.getAnswer_3());
-                                answer3=third_option.getText().toString();
-                            }
-
-                            if (value.getAnswer_4().equals("")) {
-                                forth_option.setVisibility(View.GONE);
-                            } else {
-                                forth_option.setVisibility(View.VISIBLE);
-                                forth_option.setText(value.getAnswer_4());
-                                answer4=forth_option.getText().toString();
-                            }
-
-                            if (value.getAnswer_5().equals("")) {
-                                fifth_option.setVisibility(View.GONE);
-                            } else {
-                                fifth_option.setVisibility(View.VISIBLE);
-                                fifth_option.setText(value.getAnswer_5());
-                                answer5=fifth_option.getText().toString();
-                            }
-
-                                                    }
+                        }
                     } catch (Exception e) {
                         Toast.makeText(submitAnswer.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
                     }
+
                 }
 
                 @Override
@@ -178,7 +262,7 @@ public class submitAnswer extends AppCompatActivity {
                 switch (choosedOption){
                     case R.id.first_option:
                         try {
-                            unusedtext.setText(myRef.getKey().toString());
+
                             Ref1.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -307,183 +391,343 @@ public class submitAnswer extends AppCompatActivity {
 
     }
 
-    /*public void optionChanged(View view) {
-        int choosedOption = optionsRadioGroup.getCheckedRadioButtonId();
+      public void sumbetanswer(View view) {
+          if (flag == 0) {
+              if (surveyFlag == 1) {
+                  int choosedOption = optionsRadioGroup.getCheckedRadioButtonId();
 
-        switch (choosedOption){
-            case R.id.first_option:
-                try {
-                    Ref1.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            // This method is called once with the initial value and again
-                            // whenever data at this location is updated.
-                            long value = dataSnapshot.getValue(long.class);
-                            //set the question view and show the question
-                            unusedtext.setText(Long.toString(value));
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-                            // Failed to read value
-                            Toast.makeText(submitAnswer.this, "Failed to read value", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }catch (Exception e){
-                    Toast.makeText(submitAnswer.this, e.toString() + "Failed to read value", Toast.LENGTH_LONG).show();
-                }
+                  switch (choosedOption) {
+                      case R.id.first_option:
 
-                break;
-            case R.id.second_option:
-                try {
-                    Ref2.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            // This method is called once with the initial value and again
-                            // whenever data at this location is updated.
-                            long value = dataSnapshot.getValue(long.class);
-                            //set the question view and show the question
-                            unusedtext.setText(Long.toString(value));
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-                            // Failed to read value
-                            Toast.makeText(submitAnswer.this, "Failed to read value", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }catch (Exception e){
-                    Toast.makeText(submitAnswer.this, e.toString() + "Failed to read value", Toast.LENGTH_LONG).show();
-                }
+                          try {
+                              Ref1.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
 
-                break;
-            case R.id.third_option:
-                try {
-                    Ref3.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            // This method is called once with the initial value and again
-                            // whenever data at this location is updated.
-                            long value = dataSnapshot.getValue(long.class);
-                            //set the question view and show the question
-                            unusedtext.setText(Long.toString(value));
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-                            // Failed to read value
-                            Toast.makeText(submitAnswer.this, "Failed to read value", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }catch (Exception e){
-                    Toast.makeText(submitAnswer.this, e.toString() + "Failed to read value", Toast.LENGTH_LONG).show();
-                }
+                              Toast.makeText(submitAnswer.this, "answer1 sended successfully", Toast.LENGTH_LONG).show();
+                          } catch (Exception e) {
+                              Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
+                          }
+                          break;
+                      case R.id.second_option:
+                          try {
+                              Ref2.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
 
-                break;
-            case R.id.forth_option:
-                try {
-                    myRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            // This method is called once with the initial value and again
-                            // whenever data at this location is updated.
-                            SessionData value = dataSnapshot.getValue(SessionData.class);
-                            //set the question view and show the question
-                            unusedtext.setText(Long.toString(value.getAnswer_4_count()));
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-                            // Failed to read value
-                            Toast.makeText(submitAnswer.this, "Failed to read value", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }catch (Exception e){
-                    Toast.makeText(submitAnswer.this, e.toString() + "Failed to read value", Toast.LENGTH_LONG).show();
-                }
+                              Toast.makeText(submitAnswer.this, "answer2 sended successfully", Toast.LENGTH_LONG).show();
+                          } catch (Exception e) {
+                              Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
+                          }
+                          break;
+                      case R.id.third_option:
+                          try {
+                              Ref3.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
 
-                break;
-            case R.id.fifth_option:
-                try {
-                    myRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            // This method is called once with the initial value and again
-                            // whenever data at this location is updated.
-                            SessionData value = dataSnapshot.getValue(SessionData.class);
-                            //set the question view and show the question
-                            unusedtext.setText(Long.toString(value.getAnswer_5_count()));
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-                            // Failed to read value
-                            Toast.makeText(submitAnswer.this, "Failed to read value", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }catch (Exception e){
-                    Toast.makeText(submitAnswer.this, e.toString() + "Failed to read value", Toast.LENGTH_LONG).show();
-                }
+                              Toast.makeText(submitAnswer.this, "answer3 sended successfully", Toast.LENGTH_LONG).show();
+                          } catch (Exception e) {
+                              Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
+                          }
+                          break;
+                      case R.id.forth_option:
+                          try {
+                              Ref4.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
 
-                break;
-            default:
-                break;
+                              Toast.makeText(submitAnswer.this, "answer4 sended successfully", Toast.LENGTH_LONG).show();
+                          } catch (Exception e) {
+                              Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
+                          }
+                          break;
+                      case R.id.fifth_option:
+                          try {
+                              Ref5.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
 
-        }
+                              Toast.makeText(submitAnswer.this, "answer5 sended successfully", Toast.LENGTH_LONG).show();
+                          } catch (Exception e) {
+                              Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
+                          }
+                          break;
+                      default:
+                          break;
+                  }
+              } else if (examFlag == 1) {
+                  int size = 0;
+                  if (answerquestion1 != 0) {
+                      size++;
+                  }
 
-    }
+                  if (answerquestion2 != 0) {
+                      size++;
+                  }
 
-*/
-    public void sumbetanswer(View view) {
-        if (flag == 0) {
-            int choosedOption = optionsRadioGroup.getCheckedRadioButtonId();
+                  if (answerquestion3 != 0) {
+                      size++;
+                  }
 
-            switch (choosedOption) {
-                case R.id.first_option:
+                  if (answerquestion4 != 0) {
+                      size++;
+                  }
 
-                    try {
-                        Ref1.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
+                  if (answerquestion5 != 0) {
+                      size++;
+                  }
 
-                        Toast.makeText(submitAnswer.this, "answer1 sended successfully", Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
-                    }
-                    break;
-                case R.id.second_option:
-                    try {
-                        Ref2.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
+                  if (answerquestion6 != 0) {
+                      size++;
+                  }
 
-                        Toast.makeText(submitAnswer.this, "answer2 sended successfully", Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
-                    }
-                    break;
-                case R.id.third_option:
-                    try {
-                        Ref3.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
+                  if (answerquestion7 != 0) {
+                      size++;
+                  }
 
-                        Toast.makeText(submitAnswer.this, "answer3 sended successfully", Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
-                    }
-                    break;
-                case R.id.forth_option:
-                    try {
-                        Ref4.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
+                  if (answerquestion8 != 0) {
+                      size++;
+                  }
 
-                        Toast.makeText(submitAnswer.this, "answer4 sended successfully", Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
-                    }
-                    break;
-                case R.id.fifth_option:
-                    try {
-                        Ref5.setValue(Long.parseLong(unusedtext.getText().toString()) + 1);
+                  if (answerquestion9 != 0) {
+                      size++;
+                  }
 
-                        Toast.makeText(submitAnswer.this, "answer5 sended successfully", Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        Toast.makeText(submitAnswer.this, e.toString() + "Failed to set value", Toast.LENGTH_LONG).show();
-                    }
-                    break;
-                default:
-                    break;
-            }
-            flag=1;
+                  if (answerquestion10 != 0) {
+                      size++;
+                  }
+
+                  if (size == numberofQuestions) {
+
+                      if (examRef1 != null && (answerquestion1 != 0)) {
+                          switch (Answerquestion1) {
+                              case 1:
+                                  examRef1.child("answer_1_count").setValue(answerquestion1);
+                                  break;
+                              case 2:
+                                  examRef1.child("answer_2_count").setValue(answerquestion1);
+                                  break;
+                              case 3:
+                                  examRef1.child("answer_3_count").setValue(answerquestion1);
+                                  break;
+                              case 4:
+                                  examRef1.child("answer_4_count").setValue(answerquestion1);
+                                  break;
+                              case 5:
+                                  examRef1.child("answer_5_count").setValue(answerquestion1);
+                                  break;
+                              default:
+                                  Toast.makeText(this, "question 1 not answered", Toast.LENGTH_LONG).show();
+                                  break;
+                          }
+                      }
+
+                      if (examRef2 != null && (answerquestion2 != 0)) {
+                          switch (Answerquestion2) {
+                              case 1:
+                                  examRef2.child("answer_1_count").setValue(answerquestion2);
+                                  break;
+                              case 2:
+                                  examRef2.child("answer_2_count").setValue(answerquestion2);
+                                  break;
+                              case 3:
+                                  examRef2.child("answer_3_count").setValue(answerquestion2);
+                                  break;
+                              case 4:
+                                  examRef2.child("answer_4_count").setValue(answerquestion2);
+                                  break;
+                              case 5:
+                                  examRef2.child("answer_5_count").setValue(answerquestion2);
+                                  break;
+                              default:
+                                  Toast.makeText(this, "question 2 not answered", Toast.LENGTH_LONG).show();
+                                  break;
+                          }
+                      }
+
+                      if (examRef3 != null && (answerquestion3 != 0)) {
+                          switch (Answerquestion3) {
+                              case 1:
+                                  examRef3.child("answer_1_count").setValue(answerquestion3);
+                                  break;
+                              case 2:
+                                  examRef3.child("answer_2_count").setValue(answerquestion3);
+                                  break;
+                              case 3:
+                                  examRef3.child("answer_3_count").setValue(answerquestion3);
+                                  break;
+                              case 4:
+                                  examRef3.child("answer_4_count").setValue(answerquestion3);
+                                  break;
+                              case 5:
+                                  examRef3.child("answer_5_count").setValue(answerquestion3);
+                                  break;
+                              default:
+                                  Toast.makeText(this, "question 3 not answered", Toast.LENGTH_LONG).show();
+                                  break;
+                          }
+                      }
+
+                      if (examRef4 != null && (answerquestion4 != 0)) {
+                          switch (Answerquestion4) {
+                              case 1:
+                                  examRef4.child("answer_1_count").setValue(answerquestion4);
+                                  break;
+                              case 2:
+                                  examRef4.child("answer_2_count").setValue(answerquestion4);
+                                  break;
+                              case 3:
+                                  examRef4.child("answer_3_count").setValue(answerquestion4);
+                                  break;
+                              case 4:
+                                  examRef4.child("answer_4_count").setValue(answerquestion4);
+                                  break;
+                              case 5:
+                                  examRef4.child("answer_5_count").setValue(answerquestion4);
+                                  break;
+                              default:
+                                  Toast.makeText(this, "question 4 not answered", Toast.LENGTH_LONG).show();
+                                  break;
+                          }
+                      }
+
+                      if (examRef5 != null && (answerquestion5 != 0)) {
+                          switch (Answerquestion5) {
+                              case 1:
+                                  examRef5.child("answer_1_count").setValue(answerquestion5);
+                                  break;
+                              case 2:
+                                  examRef5.child("answer_2_count").setValue(answerquestion5);
+                                  break;
+                              case 3:
+                                  examRef5.child("answer_3_count").setValue(answerquestion5);
+                                  break;
+                              case 4:
+                                  examRef5.child("answer_4_count").setValue(answerquestion5);
+                                  break;
+                              case 5:
+                                  examRef5.child("answer_5_count").setValue(answerquestion5);
+                                  break;
+                              default:
+                                  Toast.makeText(this, "question 5 not answered", Toast.LENGTH_LONG).show();
+                                  break;
+                          }
+                      }
+
+                      if (examRef6 != null && (answerquestion6 != 0)) {
+                          switch (Answerquestion6) {
+                              case 1:
+                                  examRef6.child("answer_1_count").setValue(answerquestion6);
+                                  break;
+                              case 2:
+                                  examRef6.child("answer_2_count").setValue(answerquestion6);
+                                  break;
+                              case 3:
+                                  examRef6.child("answer_3_count").setValue(answerquestion6);
+                                  break;
+                              case 4:
+                                  examRef6.child("answer_4_count").setValue(answerquestion6);
+                                  break;
+                              case 5:
+                                  examRef6.child("answer_5_count").setValue(answerquestion6);
+                                  break;
+                              default:
+                                  Toast.makeText(this, "question 6 not answered", Toast.LENGTH_LONG).show();
+                                  break;
+                          }
+                      }
+
+                      if (examRef7 != null && (answerquestion7 != 0)) {
+                          switch (Answerquestion7) {
+                              case 1:
+                                  examRef7.child("answer_1_count").setValue(answerquestion7);
+                                  break;
+                              case 2:
+                                  examRef7.child("answer_2_count").setValue(answerquestion7);
+                                  break;
+                              case 3:
+                                  examRef7.child("answer_3_count").setValue(answerquestion7);
+                                  break;
+                              case 4:
+                                  examRef7.child("answer_4_count").setValue(answerquestion7);
+                                  break;
+                              case 5:
+                                  examRef7.child("answer_5_count").setValue(answerquestion7);
+                                  break;
+                              default:
+                                  Toast.makeText(this, "question 7 not answered", Toast.LENGTH_LONG).show();
+                                  break;
+                          }
+                      }
+
+                      if (examRef8 != null && (answerquestion8 != 0)) {
+                          switch (Answerquestion8) {
+                              case 1:
+                                  examRef8.child("answer_1_count").setValue(answerquestion8);
+                                  break;
+                              case 2:
+                                  examRef8.child("answer_2_count").setValue(answerquestion8);
+                                  break;
+                              case 3:
+                                  examRef8.child("answer_3_count").setValue(answerquestion8);
+                                  break;
+                              case 4:
+                                  examRef8.child("answer_4_count").setValue(answerquestion8);
+                                  break;
+                              case 5:
+                                  examRef8.child("answer_5_count").setValue(answerquestion8);
+                                  break;
+                              default:
+                                  Toast.makeText(this, "question 8 not answered", Toast.LENGTH_LONG).show();
+                                  break;
+                          }
+                      }
+
+                      if (examRef9 != null && (answerquestion9 != 0)) {
+                          switch (Answerquestion9) {
+                              case 1:
+                                  examRef9.child("answer_1_count").setValue(answerquestion9);
+                                  break;
+                              case 2:
+                                  examRef9.child("answer_2_count").setValue(answerquestion9);
+                                  break;
+                              case 3:
+                                  examRef9.child("answer_3_count").setValue(answerquestion9);
+                                  break;
+                              case 4:
+                                  examRef9.child("answer_4_count").setValue(answerquestion9);
+                                  break;
+                              case 5:
+                                  examRef9.child("answer_5_count").setValue(answerquestion9);
+                                  break;
+                              default:
+                                  Toast.makeText(this, "question 9 not answered", Toast.LENGTH_LONG).show();
+                                  break;
+                          }
+                      }
+
+                      if (examRef10 != null && (answerquestion10 != 0)) {
+                          switch (Answerquestion10) {
+                              case 1:
+                                  examRef10.child("answer_1_count").setValue(answerquestion10);
+                                  break;
+                              case 2:
+                                  examRef10.child("answer_2_count").setValue(answerquestion10);
+                                  break;
+                              case 3:
+                                  examRef10.child("answer_3_count").setValue(answerquestion10);
+                                  break;
+                              case 4:
+                                  examRef10.child("answer_4_count").setValue(answerquestion10);
+                                  break;
+                              case 5:
+                                  examRef10.child("answer_5_count").setValue(answerquestion10);
+                                  break;
+                              default:
+                                  Toast.makeText(this, "question 10 not answered", Toast.LENGTH_LONG).show();
+                                  break;
+                          }
+                      }
+                      Toast.makeText(this, "Exam answers added successfully", Toast.LENGTH_LONG).show();
+
+
+                      flag = 1;
+                  } else {
+                      flag = 0;
+                      Toast.makeText(this, "answer all questions", Toast.LENGTH_LONG).show();
+                  }
+              }
         }
 
 

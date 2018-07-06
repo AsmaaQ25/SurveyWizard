@@ -22,18 +22,29 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:id="@+id/add_question"
+        android:hint="question"
         android:layout_below="@+id/textView5"
         android:layout_alignLeft="@+id/textView5"
         android:layout_alignStart="@+id/textView5" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:id="@+id/question_category"
+        android:hint="category"
+        android:layout_below="@+id/add_question"
+        android:layout_alignLeft="@+id/add_question"
+        android:layout_alignStart="@+id/add_question" />
+
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:layout_below="@+id/add_question"
-        android:layout_alignLeft="@+id/add_question"
-        android:layout_alignStart="@+id/add_question"
+        android:layout_below="@+id/question_category"
+        android:layout_alignLeft="@+id/question_category"
+        android:layout_alignStart="@+id/question_category"
         android:id="@+id/radioGroup">
 
         <RadioButton
@@ -70,6 +81,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
+        android:hint="answer 1"
         android:id="@+id/first_choice"
         android:layout_below="@+id/radioGroup"
         android:visibility="gone" />
@@ -77,6 +89,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
+        android:hint="answer 2"
         android:id="@+id/second_choice"
         android:layout_below="@+id/first_choice"
         android:visibility="gone" />
@@ -84,6 +97,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
+        android:hint="answer 3"
         android:id="@+id/third_choice"
         android:layout_below="@+id/second_choice"
         android:visibility="gone" />
@@ -91,6 +105,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
+        android:hint="answer 4"
         android:id="@+id/fourth_choice"
         android:layout_below="@+id/third_choice"
         android:visibility="gone"/>
@@ -99,6 +114,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
+        android:hint="answer 5"
         android:id="@+id/fifth_choice"
         android:layout_below="@+id/fourth_choice"
         android:visibility="gone"/>

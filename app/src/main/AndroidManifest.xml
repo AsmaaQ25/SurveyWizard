@@ -8,11 +8,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <service android:name=".ClosingService"
-            android:exported="false"
+        <service
+            android:name=".ClosingService"
             android:enabled="true"
-            android:stopWithTask="false"/>
+            android:exported="false"
+            android:stopWithTask="false" />
 
         <activity android:name=".HomePage">
             <intent-filter>
@@ -46,6 +46,12 @@
             android:name=".TyNote"
             android:label="Thank you!" />
         <activity android:name=".Show_Result" />
+        <activity android:name=".Survey" />
+        <activity android:name=".Create_Exam" />
+        <activity android:name=".ExamResults" />
+        <activity android:name=".SessionAnswer" />
+        <activity android:name=".questionsOfCategory" />
+        <activity android:name=".answersofQuestion"></activity>
     </application>
 
 </manifest>
