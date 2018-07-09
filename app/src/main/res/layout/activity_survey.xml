@@ -48,19 +48,44 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="upload survey"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="100dp"
         android:background="#9951EA"
-        android:onClick="UploadSurvey"/>
+        android:onClick="UploadSurvey"
+        android:layout_below="@+id/sessioncodetextView"
+        android:layout_alignLeft="@+id/button5"
+        android:layout_alignStart="@+id/button5"
+        android:layout_marginTop="77dp" />
 
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="upload exam"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="50dp"
-        android:layout_below="@id/upload_Survey_button"
         android:background="#0091EA"
-        android:onClick="UploadExam"/>
+        android:onClick="UploadExam"
+        android:id="@+id/button5"
+        android:layout_below="@+id/upload_Survey_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView21"
+        android:text="Click to upload one question survey"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/upload_Survey_button"
+        android:layout_alignLeft="@+id/sessionnametextView"
+        android:layout_alignStart="@+id/sessionnametextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView22"
+        android:text="Click to upload ten questions exam"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_below="@+id/button5"
+        android:layout_marginTop="15dp"
+        android:layout_alignLeft="@+id/textView21"
+        android:layout_alignStart="@+id/textView21" />
 
 </RelativeLayout>

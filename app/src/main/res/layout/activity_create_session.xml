@@ -30,11 +30,12 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="My Questions"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="100dp"
-        android:layout_below="@id/create_session_text"
-        android:background="#0091EA"
-        android:onClick="My_Question_activity"/>
+        android:layout_marginTop="72dp"
+        android:background="#03DAC6"
+        android:onClick="My_Question_activity"
+        android:layout_below="@+id/create_session_text"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_alignStart="@+id/button3" />
 
     <Button
         android:layout_width="150dp"
@@ -43,7 +44,30 @@
         android:layout_marginLeft="100dp"
         android:layout_marginTop="50dp"
         android:layout_below="@id/My_Questions_button"
-        android:background="#0091EA"
-        android:onClick="create_survay_activity"/>
+        android:background="#C51162"
+        android:onClick="create_survay_activity"
+        android:id="@+id/button3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView18"
+        android:text="Click to show your questions"
+        android:textColor="@color/accent_material_light"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/My_Questions_button"
+        android:layout_alignRight="@+id/create_session_text"
+        android:layout_alignEnd="@+id/create_session_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView19"
+        android:text="Click to create new survey"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/button3"
+        android:layout_alignLeft="@+id/textView18"
+        android:layout_alignStart="@+id/textView18" />
 
 </RelativeLayout>

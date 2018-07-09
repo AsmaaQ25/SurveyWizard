@@ -197,25 +197,25 @@ public class submitAnswer extends AppCompatActivity {
                                 }
 
                             } catch (Exception e) {
+                                try {
+                                    SessionExamData Value = dataSnapshot.getValue(SessionExamData.class);
 
-                            }
-                            try {
-                                SessionExamData Value = dataSnapshot.getValue(SessionExamData.class);
+                                    questionLayout.setVisibility(View.GONE);
+                                    listView.setVisibility(View.VISIBLE);
+                                    SessionName.setText(Value.getSessionName());
+                                    ArrayList<examquestion> examquestions = Value.getExamquestions();
 
-                                questionLayout.setVisibility(View.GONE);
-                                listView.setVisibility(View.VISIBLE);
-                                SessionName.setText(Value.getSessionName());
-                                ArrayList<examquestion> examquestions = Value.getExamquestions();
+                                    SubmitAnswerAdapter adapter = new SubmitAnswerAdapter(submitAnswer.this, examquestions);
 
-                                SubmitAnswerAdapter adapter = new SubmitAnswerAdapter(submitAnswer.this, examquestions);
-
-                                listView.setAdapter(adapter);
-                                surveyFlag=0;
-                                examFlag=1;
-                                numberofQuestions=examquestions.size();
+                                    listView.setAdapter(adapter);
+                                    surveyFlag=0;
+                                    examFlag=1;
+                                    numberofQuestions=examquestions.size();
 
 
-                            } catch (Exception E) {
+                                } catch (Exception E) {
+
+                                }
 
                             }
 

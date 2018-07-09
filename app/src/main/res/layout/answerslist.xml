@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:text="Show Answers"
         android:padding="5dp"
-        android:textColor="#ec3402"
+        android:textColor="#946356"
         android:layout_alignTop="@+id/textView15"
         android:layout_toLeftOf="@id/delete_button"
         />

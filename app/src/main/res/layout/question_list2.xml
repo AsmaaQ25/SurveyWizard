@@ -35,7 +35,7 @@
         android:layout_alignTop="@+id/textView3"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        />
+        android:background="#feed04" />
 
     <Button
         android:id="@+id/uploadQuestionButton"
@@ -44,10 +44,10 @@
         android:text="upload"
         style="?android:attr/buttonStyleSmall"
         android:padding="5dp"
-        android:textColor="#ec3402"
+        android:textColor="@color/abc_primary_text_disable_only_material_dark"
         android:layout_alignTop="@+id/textView3"
         android:layout_toLeftOf="@+id/showResultButton"
-        />
+        android:background="#03cefc" />
 
 
 </RelativeLayout>

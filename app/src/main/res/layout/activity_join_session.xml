@@ -34,6 +34,16 @@
         android:inputType="number" />
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Enter Session code"
+        android:id="@+id/textView20"
+        android:layout_marginTop="10dp"
+        android:textColor="#fc0a0a"
+        android:textStyle="italic" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
