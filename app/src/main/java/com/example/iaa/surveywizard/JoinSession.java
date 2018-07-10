@@ -1,6 +1,9 @@
 package com.example.iaa.surveywizard;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -50,38 +53,58 @@ public class JoinSession extends AppCompatActivity {
 
     public void joinSession(View view){
 
+        if (haveNetworkConnection() == true) {
+            try {
+                if (!code.getText().toString().equals("")) {
+                    final long codenumber = Long.parseLong(code.getText().toString());
 
+                    myRef.addValueEventListener(new ValueEventListener() {
 
-        try {
-            if (!code.getText().toString().equals("")) {
-                final long codenumber = Long.parseLong(code.getText().toString());
-                myRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot value : dataSnapshot.getChildren()) {
 
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot value : dataSnapshot.getChildren()) {
-
-                            if (value.getKey().equals(Long.toString(codenumber))) {
-                                Intent joinsessionintent = new Intent(JoinSession.this, submitAnswer.class);
-                                submitAnswer.sessionCode = value.getKey();
-                                // Start the new activity
-                                startActivity(joinsessionintent);
+                                if (value.getKey().equals(Long.toString(codenumber))) {
+                                    Intent joinsessionintent = new Intent(JoinSession.this, submitAnswer.class);
+                                    submitAnswer.sessionCode = value.getKey();
+                                    // Start the new activity
+                                    startActivity(joinsessionintent);
+                                }
+                            }
+                            if (!(submitAnswer.sessionCode.equals(Long.toString(codenumber)))) {
+                                Toast.makeText(JoinSession.this, "enter a correct code", Toast.LENGTH_LONG).show();
                             }
                         }
-                        if (!(submitAnswer.sessionCode.equals(Long.toString(codenumber)))) {
-                            Toast.makeText(JoinSession.this, "enter a correct code", Toast.LENGTH_LONG).show();
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
                         }
-                    }
+                    });
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
+                }
+            } catch (Exception e) {
+                Toast.makeText(JoinSession.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
             }
-        } catch (Exception e) {
-            Toast.makeText(JoinSession.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(JoinSession.this, "You don't have Internet connection", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 }

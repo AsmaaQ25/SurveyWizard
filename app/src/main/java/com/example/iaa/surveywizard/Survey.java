@@ -6,16 +6,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Survey extends AppCompatActivity {
 
     public static String sessionCode;
     public static String sessionName;
     TextView SessionName;
     TextView SessionCode;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef= database.getReference(sessionCode);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
+
+        startService(new Intent(this, ClosingService.class));
 
         SessionName = (TextView) findViewById(R.id.sessionnametextView);
         SessionCode = (TextView) findViewById(R.id.sessioncodetextView);
@@ -47,4 +56,12 @@ public class Survey extends AppCompatActivity {
         // Start the new activity
         startActivity(startSessionIntent);
     }
+
+    protected void ondestroy() {
+
+        myRef.removeValue();
+
+    }
+
+
 }

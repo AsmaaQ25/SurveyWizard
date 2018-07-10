@@ -1,5 +1,6 @@
 package com.example.iaa.surveywizard;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -68,6 +69,8 @@ public class Show_Result extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show__result);
+
+        startService(new Intent(this, ClosingService.class));
 
         questionTextView = (TextView) findViewById(R.id.textView10);
         answer1TextView = (TextView) findViewById(R.id.answer1textView);
@@ -192,22 +195,15 @@ public class Show_Result extends AppCompatActivity {
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                Log.d("Show_Result", "onValueSelected: Value select from chart.");
-                Log.d("Show_Result", "onValueSelected: " + e.toString());
-                Log.d("Show_Result", "onValueSelected: " + h.toString());
 
 
+                Log.d("Try it", h.toString());
                 int pos1 = 0;
                 String peresentage = e.toString();
                 peresentage = peresentage.substring(17);
-                Log.d("Show_Result", "onValueSelected: " + peresentage);
-                for(int i = 0; i < 5; i++){
-                    if(yData[i] == Float.parseFloat(peresentage)){
-                        pos1 = i;
-                        break;
-                    }
-                }
-                String AnswerNum = xData[pos1];
+
+
+                String AnswerNum = xData[(int) Float.parseFloat(h.toString().substring(14,17))];
                 Toast.makeText(Show_Result.this, AnswerNum + "\n"  + Float.toString(Float.parseFloat(peresentage)*100) + "%", Toast.LENGTH_LONG).show();
             }
 

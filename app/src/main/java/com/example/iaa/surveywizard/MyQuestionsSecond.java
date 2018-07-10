@@ -2,6 +2,8 @@ package com.example.iaa.surveywizard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -63,50 +65,59 @@ public class MyQuestionsSecond extends AppCompatActivity {
         questionsList = Dbadapter.getAllQuestionsWithoutAnswers();
 
         try {
-            myRef1.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            if(haveNetworkConnection() == true) {
+                myRef1.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                }
-
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    SessionData value = dataSnapshot.getValue(SessionData.class);
-                    //set the question view and show the question
-                    try {
-                        if (MysessionCode.equals(dataSnapshot.getKey())) {
-                            int id = Dbadapter.getIdOfQuestion(value.getQuestionBody());
-                            int updateId = Dbadapter.update(id, value.getQuestionBody(), value.getAnswer_1(), value.getAnswer_2(),
-                                    value.getAnswer_3(), value.getAnswer_4(), value.getAnswer_5(), value.getAnswer_1_count(),
-                                    value.getAnswer_2_count(), value.getAnswer_3_count(), value.getAnswer_4_count(),
-                                    value.getAnswer_5_count());
-
-                            if (updateId == 1) {
-                                Toast.makeText(MyQuestionsSecond.this, "DataBase updated successfully", Toast.LENGTH_LONG).show();
-                            }else {
-                                Toast.makeText(MyQuestionsSecond.this, "DataBase didn't update successfully", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(MyQuestionsSecond.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
                     }
-                }
 
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                }
+                        //set the question view and show the question
+                        try {
+                            if (dataSnapshot != null) {
+                                if (MysessionCode.equals(dataSnapshot.getKey())) {
+                                    if (!dataSnapshot.getValue().equals(MysessionCode)) {
+                                        SessionData value = dataSnapshot.getValue(SessionData.class);
+                                        int id = Dbadapter.getIdOfQuestion(value.getQuestionBody());
+                                        int updateId = Dbadapter.update(id, value.getQuestionBody(), value.getAnswer_1(), value.getAnswer_2(),
+                                                value.getAnswer_3(), value.getAnswer_4(), value.getAnswer_5(), value.getAnswer_1_count(),
+                                                value.getAnswer_2_count(), value.getAnswer_3_count(), value.getAnswer_4_count(),
+                                                value.getAnswer_5_count());
 
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                                        if (updateId == 1) {
+                                            Toast.makeText(MyQuestionsSecond.this, "DataBase updated successfully", Toast.LENGTH_LONG).show();
+                                        } else {
+                                            Toast.makeText(MyQuestionsSecond.this, "DataBase didn't update successfully", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(MyQuestionsSecond.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
+                        }
+                    }
 
-                }
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                    }
 
-                }
-            });
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }else{
+                Toast.makeText(MyQuestionsSecond.this, "You don't have Internet connection", Toast.LENGTH_LONG).show();
+            }
         }catch (Exception e)
         {
             Toast.makeText(MyQuestionsSecond.this, e.toString() + " can't read", Toast.LENGTH_LONG).show();
@@ -141,17 +152,35 @@ public class MyQuestionsSecond extends AppCompatActivity {
 
     }
 
-    protected void ondestroy() {
-        myRef.removeValue();
-    }
-
-
 
     public void endSession(View view) {
 
-        myRef.removeValue();
+        if(haveNetworkConnection() == true) {
+            myRef.onDisconnect().removeValue();
 
-        Intent intent = new Intent(this, HomePage.class);
-        startActivity(intent);
+            myRef.removeValue();
+
+            Intent intent = new Intent(this, HomePage.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(MyQuestionsSecond.this, "You don't have Internet connection", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 }

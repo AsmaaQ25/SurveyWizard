@@ -91,8 +91,9 @@ public class DatabaseAdapter {
         while(cursor.moveToNext()){
             int cid = cursor.getInt(cursor.getColumnIndex(helper.Uid));
             String category = cursor.getString(cursor.getColumnIndex(helper.category));
-
-            buf.add(category);
+            if (!buf.contains(category)) {
+                buf.add(category);
+            }
         }
         return buf;
     }

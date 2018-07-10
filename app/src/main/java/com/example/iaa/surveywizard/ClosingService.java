@@ -29,16 +29,9 @@ public class ClosingService extends Service {
     }
 
     private void fireClosingNotification() {
-        if (flag == 1) {
-            MyQuestionsSecond myquestion = new MyQuestionsSecond();
 
-            myquestion.ondestroy();
-        }else if (flag == 2)
-        {
-            Create_Exam create_exam = new Create_Exam();
-
-            create_exam.ondestroy();
-        }
+        Survey survey = new Survey();
+        survey.ondestroy();
 
     }
 }
